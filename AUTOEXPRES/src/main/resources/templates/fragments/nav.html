@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="nav">
+  <div class="container-fluid">
+    <a class="navbar-brand" th:href="@{/}">
+      <img src="../../imagenes/AJfQ9KRcm7OUqAex1A2PMvt9o1NDFH0I.png" alt="AutoXpres Logo" height="40" class="d-inline-block align-top me-2">
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/}">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/catalogo}">Vehículos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/alquiler}">Renta de vehículos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/nosotros}">Sobre Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/contacto}">Contáctenos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-dark text-white rounded-pill ms-lg-2" th:href="@{/login}">Iniciar Sesión</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

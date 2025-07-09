@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoXpres - Tu próximo viaje comienza aquí</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <header>
+        <div th:replace="~{fragments/nav :: nav}"></div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <img src="https://lh3.googleusercontent.com/fife/ALs6j_Gw6VfD6iSjTeZNswDTQPsKzQFFiMa7hG7oxs7R6fS-UK5A3dWbXD1YrRPXtB32FPGsPpWoK4UftX2pHCtjirq9O8vQJK0Ck8BD37y_bQ2KVpvaQgIrblDZTuJ1AkkNX0i4s647eEmpAvKFpRTby1TScTf02s3DErz-ylgynQPrcmLozg2PI-En-oay3bGU11hmMe2Sjwwbp4n3PSy9CMndYqCuzC8cL9UI0gcNc7q19Q1b9yO_GXb1ILk7HbKL7qnrXWBtzjTjbkzKoRtFUXiSsL39an1aykQ_ytBNbIk56OzkOF1DXh71bh70uAO4YZY5IGvb9zt6hwzvMsbhiAeW5l_VA9JgloMh3VShsTljekZFeCoXx9FbtqZC19X1L9Hdh7plTyuD9V66kBZksLq5oVe5EF63pjb1K9FIyP5YNOrm5Rn7uEWHQwKiUzlV2FJWcdFpAYMFeoig09V794xiPXDM1utgVj_oC5MWNsjr0z8b1p2lhYSwoeUW4zKvxUN3By1jp28JXM-_wz2E3tKYG2kjj8V9cwXmkFhElK38UYT_ummkb-G2K8wZOZYM8l9uVX08EDfwPkmk1fZ-xRvvQe-FpZyLwq7ocB4tW2FrFyw8rvRkJXpB8XTR3EVyPcHDxK2T3NBuZbdYYaPXDscqUoc5iDL9-wgA4jyEAtCWCxZ8g8eZteGhwFKQHqqDmGxCT8Aq7Yunqso0k9ZeqEdQln_f3yVRInNkaSGulJR3-Qds1iyDohXegPJNP4j2Swrzoj9VIM3DEwCz0vm-soHOKBv18FH614uIl-8jyEzoshz2DUe9L_mSsYURriWLy9EY6qMkwkztiovoGQYGWYnWNCLTQ1axxe0vo6zPk6YXZExp8LDql2U3XfRwiaWjGfYbGCiv7hGsrVCLCXBKnRfX4KnZWpHZBhiHnuCZtAq8UoIg7BTGtSoWeMYSto_7BPAqW1B1qi2JyWUYX5wLw9gwnhowe0nmr0KEDuKXvKYwBZ9XbWPbwuBIQUw1CNacPdp1EPjCeCSY9KKoHEY7pE5RAyAX-Swf01PLGycU1kliNepjZyUPYjFWZA7FW1onqXFG5aMCQTKpWRj6lUkZ8fh7B9IiVpGiCp_VfiCROo4VAqp4ty9_Lwc4-j2kn95qigQy3S--klD6Vz1t8P6mrXD0-Nbu5fnjJE42hmpV9BBXIgrVxZtHt3YJDAdYH0jsdpbfQ8Lz8uoSEHlewYiDbt55YTSnlS1PMsG4npNcRCnCSxcyDlvqExpICXFULXVEqYc3tIh_TCnd14fK8PCZqrXOddVa5bLvTvZcJaTscO2RWM5LVsDpJ3ql-QyRFk6ovBmsV1HSBJbyzRr_-9tE=s1536-w1536-h1024-n-k?authuser=0" alt="Tu próximo viaje comienza aquí" height="800">
+            <div class="hero-content">
+                <h1 class="text-white">Tu próximo viaje comienza aquí</h1>
+                <p class="lead text-white">En AutoXpres, te acompañamos en cada paso para que encuentres la perfección sobre ruedas. Asesoramiento experto y financiación a tu medida.</p>
+                <a th:href="@{/catalogo}" class="btn btn-primary btn-lg">Explora Nuestros Vehículos</a>
+            </div>
+        </section>
+
+        <section class="container my-5 feature-section">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img th:src="@{/images/suv_familiar.jpg}" class="img-fluid feature-img" alt="Vehículo destacado">
+                </div>
+                <div class="col-md-6 text-center text-md-start">
+                    <h2 class="display-5 fw-bold mb-3">La SUV Familiar Ideal</h2>
+                    <p class="lead text-muted">Espaciosa, segura y con tecnología de punta. Perfecta para tus aventuras en familia y la vida diaria.</p>
+                    <p>Descubre la comodidad y el rendimiento que esta increíble SUV te ofrece. Con un diseño moderno y un interior lujoso, cada viaje será una experiencia inolvidable.</p>
+                    <a th:href="@{/cotizar/suv-familiar}" class="btn btn-success btn-lg mt-3">Cotizar Ahora</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container my-5">
+            <h2 class="text-center mb-4">Vehículos Destacados</h2>
+            <div id="vehicleCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="col">
+                            <div class="card m-2">
+                                <img th:src="@{/images/coche1.jpg}" class="card-img-top" alt="Coche Modelo X">
+                                <div class="card-body">
+                                    <h5 class="card-title">Coche Modelo X</h5>
+                                    <p class="card-text text-muted">Sedán | $25,000</p>
+                                    <a th:href="@{/vehiculo/1}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card m-2">
+                                <img th:src="@{/images/coche2.jpg}" class="card-img-top" alt="Camioneta Y">
+                                <div class="card-body">
+                                    <h5 class="card-title">Camioneta Y</h5>
+                                    <p class="card-text text-muted">SUV | $38,000</p>
+                                    <a th:href="@{/vehiculo/2}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card m-2">
+                                <img th:src="@{/images/coche3.jpg}" class="card-img-top" alt="Deportivo Z">
+                                <div class="card-body">
+                                    <h5 class="card-title">Deportivo Z</h5>
+                                    <p class="card-text text-muted">Coupé | $55,000</p>
+                                    <a th:href="@{/vehiculo/3}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card m-2">
+                                <img th:src="@{/images/coche4.jpg}" class="card-img-top" alt="Compacto A">
+                                <div class="card-body">
+                                    <h5 class="card-title">Compacto A</h5>
+                                    <p class="card-text text-muted">Hatchback | $18,000</p>
+                                    <a th:href="@{/vehiculo/4}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="col">
+                            <div class="card m-2">
+                                <img th:src="@{/images/coche5.jpg}" class="card-img-top" alt="Sedán B">
+                                <div class="card-body">
+                                    <h5 class="card-title">Sedán B</h5>
+                                    <p class="card-text text-muted">Sedán | $28,500</p>
+                                    <a th:href="@{/vehiculo/5}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card m-2">
+                                <img th:src="@{/images/coche6.jpg}" class="card-img-top" alt="Familiar C">
+                                <div class="card-body">
+                                    <h5 class="card-title">Familiar C</h5>
+                                    <p class="card-text text-muted">SUV | $42,000</p>
+                                    <a th:href="@{/vehiculo/6}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card m-2">
+                                <img th:src="@{/images/coche7.jpg}" class="card-img-top" alt="Compacto D">
+                                <div class="card-body">
+                                    <h5 class="card-title">Compacto D</h5>
+                                    <p class="card-text text-muted">Hatchback | $20,000</p>
+                                    <a th:href="@{/vehiculo/7}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card m-2">
+                                <img th:src="@{/images/coche8.jpg}" class="card-img-top" alt="Deportivo E">
+                                <div class="card-body">
+                                    <h5 class="card-title">Deportivo E</h5>
+                                    <p class="card-text text-muted">Coupé | $60,000</p>
+                                    <a th:href="@{/vehiculo/8}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#vehicleCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#vehicleCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="container my-5 text-center">
+            <h2 class="mb-4">Nuestros Servicios Destacados</h2>
+            <p class="lead">Descubre por qué somos tu mejor opción para comprar o alquilar un vehículo.</p>
+            <div class="row mt-5">
+                <div class="col-md-4 mb-4">
+                    <i class="bi bi-car-front-fill display-4 text-primary"></i>
+                    <h3 class="mt-3">Vehículos Nuevos</h3>
+                    <p>La última tecnología y modelos 0km para que estrenes el auto de tus sueños.</p>
+                    <a th:href="@{/catalogo}" class="btn btn-sm btn-outline-secondary">Ver Modelos</a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="bi bi-key-fill display-4 text-primary"></i>
+                    <h3 class="mt-3">Renta Flexible</h3>
+                    <p>Alquila el vehículo perfecto para tu viaje o negocio, por días, semanas o meses.</p>
+                    <a th:href="@{/alquiler}" class="btn btn-sm btn-outline-secondary">Más Información</a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="bi bi-headset display-4 text-primary"></i>
+                    <h3 class="mt-3">Soporte 24/7</h3>
+                    <p>Nuestro equipo está listo para ayudarte en todo momento con tus consultas.</p>
+                    <a th:href="@{/contacto}" class="btn btn-sm btn-outline-secondary">Contáctanos</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
