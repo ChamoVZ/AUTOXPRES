@@ -19,8 +19,40 @@ public class VehiculoController {
     }
 
     // Endpoint para la cotización
+  
     @GetMapping("/cotizacion/porsche-911")
-    public String mostrarCotizacionPorche() {
-        return "vehiculos/cotizacion_porsche";
+    public String mostrarCotizacionPorsche911() {  
+        return "vehiculos/porche_911";
+    }
+    
+    @GetMapping("/cotizacion/touareg-r")
+    public String mostrarCotizacionTouareg() {  
+        return "vehiculos/Volkswagen_Touareg";
+    }
+    
+    @GetMapping("/cotizacion/bmw-m850i")
+    public String mostrarCotizacionBMWM850i() {  
+        return "vehiculos/BMW_Serie8";
+    }
+    
+    @GetMapping("/cotizacion/bmw-x6")
+    public String mostrarCotizacionBMWX6() { 
+        return "vehiculos/BMW_X6";
+    }
+    
+    @GetMapping("/cotizacion/panamera")
+    public String mostrarCotizacionPanamera() {
+        return "vehiculos/Porshe_Panamera";
+    }
+    
+    @GetMapping("/cotizacion/audi-a6")
+    public String mostrarCotizacionAudiA6() {  
+        return "vehiculos/Audi_A6";
+    }
+    
+     // Endpoint para la renta
+    @GetMapping("/alquiler")
+    public String mostrarRenta() {  
+        return "renta";
     }
 }
