@@ -40,31 +40,32 @@
 
         <section class="container my-5">
             <h2 class="text-center mb-4">Vehículos Destacados</h2>
-            <div id="vehicleCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+            <div id="vehicleCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="col">
-                            <div class="card m-2">
-                                <img th:src="@{/images/coche1.jpg}" class="card-img-top" alt="Coche Modelo X">
+                    <div class="carousel-item active"> <div class="d-flex justify-content-center"> <div class="card m-2" style="max-width: 1000px;"> <img src="https://lh3.googleusercontent.com/fife/ALs6j_EZxyZ92AAYu1Av3BKsM5Bbv8tEirBcwrOMuD_6N3tSbAp4DMSW6ycmPzOJbLEC7glEHUXw7TJgVvHs7rV_i7few7-XmY-Bncl3Iq_wcUWae22YfoJLHLCcMcoj2_Sw5iMmNqiaC_9FSRP-g9X-Vvh5WKMoyObgAlu5YiBkY7-PQm4MZB5JU415K3LYOS8rCfysjtrsKH_fmQLCdFqXfHMjAdwZzWgYN5w5C5lt38kVp8IN6ZYSGklSL6UOqw4kgmygML9U7xl8csuFOsy6hoQhM4RFWgL_4kiFVvlK6hQn2nHOoDuFch6g0rjQv4VxjZ69bb5Qb7tRbG-vby3ja0XJgIU82ycJmI-T9nAFUJ3_NHolkfu9WrPhumreAKKpVROAhnta_vmeaV_BaoiYbD3QpEc_rZ2wAZUGb5rTCdsFWs1WVs0eKq1tubc3r6zrlyV8tqyH7eH2yiZalOPrkRsoCXQ61p_T2ARbgxKrUlCLU7tOVMF2Gar4uRxfxXcYJSkzvatqNDVw8q4MaPSqarVQfjpH7MFLP8X3OycWjQhXnDzPrQ_TkMo9JYk32aAdSbFSPngS4JYiw4y2c1_rTsOBkS5vs_q_DD4mZgbFKdYTJ3LQ-KaSR6ZFE4O724HdpYi3sjPB2sz1EeVynwBEKb_Fgf65dTklOMPD_-IJT_UWGehmhWAAb34Y4HcWatL--2PsYQAGPMVKSfknzUHsSJ9IyA5oGg1rFh5RryOLaDJ4CckGo8Zrjv-pTrUK9TPmvLYU1AEtocMszAwPKo6MrcH1DIXbBro9PEsGHCBiv6tA9YTAvFtRjp7drtDReGgKo85iXHKpcRCe8qz8yULIpueUkj6qMnniRUn6-CEH-a1OzwuNRKUiYZCbNg_4-4nJqogDP7YBcrW1I8tPQdAlguLkOIxJNSkzYebvTKlRIQlzbbIDZYycwY7EDIwXrO7xusW9-dVZeCUN_2w1u9_QbB_lC451Qc2s2NDgg7ie3QbWT-OnX1QFwFXn5TczXH0xZn2ig7laPWhd2wOL6qcTpDVXB6t-90dAFIYygyjX_9FgS1rGwtVT20-raOMnljTF9SvunYVydBhJCM12W8o-hTJsUHuLjbj9gPufRcasMrCNhWzgzBG0x1_ZppqvFVJWX1os_4NNg0HTy7FwfHVC5ltzbJBSdK2HQWlJEx-fxvmN29nopNRbkZ4eqM9Wqgp2-EbJpXQrtkcHV1EI6mupV33j8d_-Ho7fao34EiY_k6xAxnx81jGPS-CdskTzKYFe3nHl__NCJsqZ7RQ9C9FGDsgV7-SJRKXTq7QPQOSLvyDXF_lXk6HT85Cej0sx4NqYUqxNJ3Lq4b7WK8mFLfUHPQ=s1280-w1280-h843-n-k?authuser=0" class="card-img-top" alt="BMW Modelo X">
                                 <div class="card-body">
-                                    <h5 class="card-title">Coche Modelo X</h5>
+                                    <h5 class="card-title">BMW Modelo X</h5>
                                     <p class="card-text text-muted">Sedán | $25,000</p>
                                     <a th:href="@{/vehiculo/1}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card m-2">
-                                <img th:src="@{/images/coche2.jpg}" class="card-img-top" alt="Camioneta Y">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-center">
+                            <div class="card m-2" style="max-width: 1000px;">
+                                <img src="https://lh3.googleusercontent.com/fife/ALs6j_FGwtXHkS-CVlijAP-oi8fN3tArCgrwioXZpI0OyOxy7r1IdTPVKE6CqM3fXdoiHmKx5JecmububF0bLUitrX9WNzZ1EhRkMq3WPGoKpd8IydF7aqWSxx5brWecF0HWz-tyIzPKb19hp58HoE5LTcCpL_Vjr4-w0Tv6S_GgUZa4DRhE3QRykfh_D8nPyqkiUPIhqKUeU07e_4s8xf5wrdi81cfjZXi-3R8z9ED_I_V46mAV2eXNcZ_mXgX2ULiracnnFF5J0eFd7eVx5B3J6rLWyhPC5s5frQg-kh7RZSxnJEqPfT1ZcR4KHrczYwqboJ_loPN4TpVFtJ2PaFj8tA4o4Y1Tzo2ztpS5APJWzaxzMQJWft41E6iC22hzLvZlQKAMZNXR2P9qwz7--qFnUmpq7TESOtvNu7mFqZ9K96_aLbz66Kof4gbofTtSYHU3lFlWMWmynskUR89R-G-1p4wKePkYbovnXJaxn-s_mFK_OV63UDn15eJaSxTmxYJPujzP8MCYZOieNdhWdhN-TtElkfHYLge0toR9KpVTdQ8kPfQwcKL3DbDREzmFAxrzW2YbvsUE_oiutO4bL26bG-ogoRHp2oIodVsjrZrBpQuKtMUkSYLImRB74Mo-SHliQFXzvLxYz80-bSZGbLPCmEsYrPOS5VtJTuq3R0gP3tf-mJ9SXm502SFe4B-9y1wd1M4Zs91KR7V-LXG1kkUaohuQbcMadD1c8w_pyzIavD-vhbnX0T54fX5wtqfFESHJUp0X_VrPgYZvaIEatZ78_NXALJDEZtrw3N-jTpn9QVjeJ6DLavZtUyZ_NwoZU52IhDtc22ChKdPFC-VRMAI-03ZtdtBMqTQDSY36kR2lJfvzRtdqLWIn8-BLTym_atDyDsqbzbVDvGE519bG06VQv3P0Dwqw0oelq66EBoE63wgqDyWUW5yHiZT3VMCZMnZptqv8vB_q9Fd_oOrxyGfGCAQoM76O0gbbS9XNXvKylG7kQ4RwLQwrLtwniHZXKjaIEoKcpIUCwzJXvqkn5xkEKC8bxYFmyG619WkkH9Ee7WNd8ID7Bnfg-C2MmjkZQc2hSdtNv9xtGPgA06Kj4kga0woviUyEfQZLXVrSvtUzX55g_yZaFzl0HjQszwF3jHInhvwI_Hro8NBrjldn0EOVa2l9eUoyPonRXwhOqv3Aoc0pmXwNAD5LMbZ4-oORpfXjbNb5Ox0ts9yTqo6AAJLAtuKx7-C9LfYnGBeGyE0I4Lxh4rvnngGDYWs4dal9el-selluyzVwrebZOw_kfRM9xJ-HRWdydVMDCPtbkT_h05dODPj9_7ASHY64XAW0akbTZbiEYy70MlqO6OhTA-5y8w=s1280-w1280-h960-n-k?authuser=0" class="card-img-top" alt="Mini Cooper">
                                 <div class="card-body">
-                                    <h5 class="card-title">Camioneta Y</h5>
+                                    <h5 class="card-title">Mini Cooper</h5>
                                     <p class="card-text text-muted">SUV | $38,000</p>
                                     <a th:href="@{/vehiculo/2}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card m-2">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-center">
+                            <div class="card m-2" style="max-width: 1000px;">
                                 <img th:src="@{/images/coche3.jpg}" class="card-img-top" alt="Deportivo Z">
                                 <div class="card-body">
                                     <h5 class="card-title">Deportivo Z</h5>
@@ -73,8 +74,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card m-2">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-center">
+                            <div class="card m-2" style="max-width: 1000px;">
                                 <img th:src="@{/images/coche4.jpg}" class="card-img-top" alt="Compacto A">
                                 <div class="card-body">
                                     <h5 class="card-title">Compacto A</h5>
@@ -84,10 +87,9 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="carousel-item">
-                        <div class="col">
-                            <div class="card m-2">
+                        <div class="d-flex justify-content-center">
+                            <div class="card m-2" style="max-width: 1000px;">
                                 <img th:src="@{/images/coche5.jpg}" class="card-img-top" alt="Sedán B">
                                 <div class="card-body">
                                     <h5 class="card-title">Sedán B</h5>
@@ -96,8 +98,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card m-2">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-center">
+                            <div class="card m-2" style="max-width: 1000px;">
                                 <img th:src="@{/images/coche6.jpg}" class="card-img-top" alt="Familiar C">
                                 <div class="card-body">
                                     <h5 class="card-title">Familiar C</h5>
@@ -106,8 +110,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card m-2">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-center">
+                            <div class="card m-2" style="max-width: 1000px;">
                                 <img th:src="@{/images/coche7.jpg}" class="card-img-top" alt="Compacto D">
                                 <div class="card-body">
                                     <h5 class="card-title">Compacto D</h5>
@@ -116,8 +122,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card m-2">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-center">
+                            <div class="card m-2" style="max-width: 1000px;">
                                 <img th:src="@{/images/coche8.jpg}" class="card-img-top" alt="Deportivo E">
                                 <div class="card-body">
                                     <h5 class="card-title">Deportivo E</h5>
@@ -127,7 +135,7 @@
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#vehicleCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo} + ' - AutoXpres'"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <header>
+        <div th:replace="~{fragments/nav :: nav}"></div>
+    </header>
+
+    <main class="container my-5">
+        <h1 class="mb-4" th:text="${titulo}"></h1>
+
+        <form th:action="@{/admin/vehiculos/guardar}" th:object="${vehiculo}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="mb-3">
+                <label for="marca" class="form-label">Marca:</label>
+                <input type="text" id="marca" th:field="*{marca}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="modelo" class="form-label">Modelo:</label>
+                <input type="text" id="modelo" th:field="*{modelo}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="anio" class="form-label">Año:</label>
+                <input type="text" id="anio" th:field="*{anio}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="color" class="form-label">Color:</label>
+                <input type="text" id="color" th:field="*{color}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="tipoCarroceria" class="form-label">Tipo de Carrocería:</label>
+                <select id="tipoCarroceria" th:field="*{tipoCarroceria}" class="form-select" required>
+                    <option value="">Seleccione</option>
+                    <option value="Sedan">Sedán</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Hatchback">Hatchback</option>
+                    <option value="Coupe">Coupé</option>
+                    <option value="Pickup">Pickup</option>
+                    <option value="Minivan">Minivan</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="kilometraje" class="form-label">Kilometraje:</label>
+                <input type="number" id="kilometraje" th:field="*{kilometraje}" class="form-control" required min="0">
+            </div>
+            <div class="mb-3">
+                <label for="transmision" class="form-label">Transmisión:</label>
+                <select id="transmision" th:field="*{transmision}" class="form-select" required>
+                    <option value="">Seleccione</option>
+                    <option value="Automatica">Automática</option>
+                    <option value="Manual">Manual</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="tipoCombustible" class="form-label">Tipo de Combustible:</label>
+                <select id="tipoCombustible" th:field="*{tipoCombustible}" class="form-select" required>
+                    <option value="">Seleccione</option>
+                    <option value="Gasolina">Gasolina</option>
+                    <option value="Diesel">Diésel</option>
+                    <option value="Electrico">Eléctrico</option>
+                    <option value="Hibrido">Híbrido</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="numeroAsientos" class="form-label">Número de Asientos:</label>
+                <input type="number" id="numeroAsientos" th:field="*{numeroAsientos}" class="form-control" required min="1">
+            </div>
+            <div class="mb-3">
+                <label for="numeroPuertas" class="form-label">Número de Puertas:</label>
+                <input type="number" id="numeroPuertas" th:field="*{numeroPuertas}" class="form-control" required min="2">
+            </div>
+            <div class="mb-3">
+                <label for="precio" class="form-label">Precio:</label>
+                <input type="number" id="precio" th:field="*{precio}" class="form-control" required step="0.01" min="0">
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="urlImagen" class="form-label">URL de la Imagen:</label>
+                <input type="url" id="urlImagen" th:field="*{urlImagen}" class="form-control" placeholder="Ej: /images/coche.jpg o https://ejemplo.com/imagen.jpg">
+            </div>
+
+            <button type="submit" class="btn btn-success me-2">Guardar Vehículo</button>
+            <a th:href="@{/admin/vehiculos}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </main>
+
+    <footer>
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
