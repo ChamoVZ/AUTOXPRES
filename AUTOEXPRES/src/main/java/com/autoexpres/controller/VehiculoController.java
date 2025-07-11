@@ -66,6 +66,7 @@ public class VehiculoController {
         return "renta"; // Vista: templates/renta.html
     }
 
+
     // Endpoint para mostrar detalles de un vehículo específico del catálogo (usando ID)
     // Esto es útil si quieres tener páginas de detalles dinámicas para cada vehículo
     @GetMapping("/vehiculo/{id}")
@@ -129,3 +130,8 @@ public class VehiculoController {
         return "redirect:/admin/vehiculos";
     }
 }
+
+    
+   
+
+
