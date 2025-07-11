@@ -75,18 +75,21 @@
         <h1 class="text-center mb-5">Catálogo de Vehículos</h1>
         
         <div class="vehicle-row">
-            <!-- Fila 1 -->
-            <div class="vehicle-col">
-                <!-- Porsche 911 GT3 RS -->
-                <div class="card vehicle-card">
-                    <img src="https://images.finder.porsche.com/395f86f3-d077-4579-b414-2f2385324385/960" class="card-img-top vehicle-img" alt="Porsche 911 GT3 RS">
-                    <div class="card-body">
-                        <h3 class="vehicle-title">Porsche 911 GT3 RS</h3>
-                        <p class="vehicle-specs"><strong>Año:</strong> 2016 - <strong>KM:</strong> 20,000</p>
-                        <a th:href="@{/cotizacion/porsche-911}" class="quote-btn">Haz tu cotización</a>
-                    </div>
-                </div>
+    <div class="vehicle-col" th:each="vehiculo : ${vehiculos}">
+        <div class="card vehicle-card">
+            <img th:src="@{${vehiculo.rutaImagen}}" class="card-img-top vehicle-img" th:alt="${vehiculo.marca} + ' ' + ${vehiculo.modelo}" onerror="this.onerror=null;this.src='/images/placeholder.png';">
+            <div class="card-body">
+                <h3 class="vehicle-title" th:text="${vehiculo.marca} + ' ' + ${vehiculo.modelo}">[Nombre del Vehículo]</h3>
+                <p class="vehicle-specs">
+                    <strong>Año:</strong> <span th:text="${vehiculo.anio}">[Año]</span> -
+                    <strong>KM:</strong> <span th:text="${vehiculo.kilometraje}">[KM]</span>
+                </p>
+                <p class="vehicle-price" th:text="${#numbers.formatCurrency(vehiculo.precio)}"></p>
+                <a th:href="@{/vehiculo/{id}(id=${vehiculo.id})}" class="quote-btn">Ver Detalles / Cotización</a>
             </div>
+        </div>
+    </div>
+
             
             <div class="vehicle-col">
                 <!-- VOLKSWAGEN TOUAREG R -->

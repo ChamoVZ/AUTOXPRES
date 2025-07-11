@@ -38,8 +38,12 @@
                         <th>Marca</th>
                         <th>Modelo</th>
                         <th>Año</th>
-                        <th>Color</th>
+                        <th>Kilometraje</th>
+                        <th>Transmisión</th>
+                        <th>Combustible</th>
                         <th>Precio</th>
+                        <th>Descripción</th>
+                        <th>Fecha Ingreso</th>
                         <th>Imagen</th>
                         <th>Acciones</th>
                     </tr>
@@ -50,11 +54,15 @@
                         <td th:text="${vehiculo.marca}"></td>
                         <td th:text="${vehiculo.modelo}"></td>
                         <td th:text="${vehiculo.anio}"></td>
-                        <td th:text="${vehiculo.color}"></td>
+                        <td th:text="${vehiculo.kilometraje}"></td>
+                        <td th:text="${vehiculo.transmision}"></td>
+                        <td th:text="${vehiculo.tipoCombustible}"></td>
                         <td th:text="${#numbers.formatCurrency(vehiculo.precio)}"></td>
+                        <td th:text="${vehiculo.descripcion}"></td>
+                        <td th:text="${#dates.format(vehiculo.fechaIngreso, 'dd-MM-yyyy')}"></td>
                         <td>
-                            <img th:if="${vehiculo.urlImagen}" th:src="${vehiculo.urlImagen}" alt="Imagen del vehículo" style="width: 100px; height: auto;">
-                            <span th:unless="${vehiculo.urlImagen}">Sin imagen</span>
+                            <img th:if="${vehiculo.rutaImagen}" th:src="@{${vehiculo.rutaImagen}}" alt="Imagen del vehículo" style="width: 100px; height: auto;" onerror="this.onerror=null;this.src='/images/placeholder.png';">
+                            <span th:unless="${vehiculo.rutaImagen}">Sin imagen</span>
                         </td>
                         <td>
                             <a th:href="@{/admin/vehiculos/editar/{id}(id=${vehiculo.id})}" class="btn btn-sm btn-info me-2">
@@ -67,7 +75,7 @@
                         </td>
                     </tr>
                     <tr th:if="${vehiculos.empty}">
-                        <td colspan="8" class="text-center">No hay vehículos registrados.</td>
+                        <td colspan="12" class="text-center">No hay vehículos registrados.</td>
                     </tr>
                 </tbody>
             </table>

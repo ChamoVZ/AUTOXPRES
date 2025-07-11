@@ -32,23 +32,7 @@
                 <label for="anio" class="form-label">Año:</label>
                 <input type="text" id="anio" th:field="*{anio}" class="form-control" required>
             </div>
-            <div class="mb-3">
-                <label for="color" class="form-label">Color:</label>
-                <input type="text" id="color" th:field="*{color}" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="tipoCarroceria" class="form-label">Tipo de Carrocería:</label>
-                <select id="tipoCarroceria" th:field="*{tipoCarroceria}" class="form-select" required>
-                    <option value="">Seleccione</option>
-                    <option value="Sedan">Sedán</option>
-                    <option value="SUV">SUV</option>
-                    <option value="Hatchback">Hatchback</option>
-                    <option value="Coupe">Coupé</option>
-                    <option value="Pickup">Pickup</option>
-                    <option value="Minivan">Minivan</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>
+            
             <div class="mb-3">
                 <label for="kilometraje" class="form-label">Kilometraje:</label>
                 <input type="number" id="kilometraje" th:field="*{kilometraje}" class="form-control" required min="0">
@@ -71,14 +55,7 @@
                     <option value="Hibrido">Híbrido</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <label for="numeroAsientos" class="form-label">Número de Asientos:</label>
-                <input type="number" id="numeroAsientos" th:field="*{numeroAsientos}" class="form-control" required min="1">
-            </div>
-            <div class="mb-3">
-                <label for="numeroPuertas" class="form-label">Número de Puertas:</label>
-                <input type="number" id="numeroPuertas" th:field="*{numeroPuertas}" class="form-control" required min="2">
-            </div>
+            
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio:</label>
                 <input type="number" id="precio" th:field="*{precio}" class="form-control" required step="0.01" min="0">
@@ -88,10 +65,9 @@
                 <textarea id="descripcion" th:field="*{descripcion}" class="form-control" rows="3" required></textarea>
             </div>
             <div class="mb-3">
-                <label for="urlImagen" class="form-label">URL de la Imagen:</label>
-                <input type="url" id="urlImagen" th:field="*{urlImagen}" class="form-control" placeholder="Ej: /images/coche.jpg o https://ejemplo.com/imagen.jpg">
+                <label for="rutaImagen" class="form-label">URL de la Imagen:</label>
+                <input type="url" id="rutaImagen" th:field="*{rutaImagen}" class="form-control" placeholder="Ej: /images/coche.jpg o https://ejemplo.com/imagen.jpg">
             </div>
-
             <button type="submit" class="btn btn-success me-2">Guardar Vehículo</button>
             <a th:href="@{/admin/vehiculos}" class="btn btn-secondary">Cancelar</a>
         </form>

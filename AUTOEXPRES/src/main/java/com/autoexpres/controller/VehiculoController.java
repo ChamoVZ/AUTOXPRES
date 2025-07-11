@@ -2,14 +2,17 @@ package com.autoexpres.controller; // Asegúrate de que el paquete sea correcto,
 
 import com.autoexpres.model.Vehiculo; // Asume que Vehiculo está en este paquete
 import com.autoexpres.service.VehiculoService; // Asume que VehiculoService está en este paquete
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 @Controller
 @RequestMapping("") // Mantenemos el RequestMapping a nivel de clase vacío para las rutas principales
+
 public class VehiculoController {
 
     @Autowired // Inyecta el servicio para interactuar con los datos de vehículos
@@ -25,7 +28,10 @@ public class VehiculoController {
 
     // Endpoint para el catálogo principal
     @GetMapping("/catalogo")
-    public String mostrarCatalogo() {
+    public String mostrarCatalogo(Model model) {
+        List<Vehiculo> vehiculos = vehiculoService.findAllVehiculos();
+        // Agrega la lista al modelo con el nombre "vehiculos"
+        model.addAttribute("vehiculos", vehiculos); 
         return "vehiculos/Catalogo_Vehiculos"; // Vista: templates/vehiculos/Catalogo_Vehiculos.html
     }
 
@@ -129,6 +135,14 @@ public class VehiculoController {
         }
         return "redirect:/admin/vehiculos";
     }
+   // @GetMapping("/catalogo")
+   // public String mostrarCatalogo(Model model) {
+        // Obtiene todos los vehículos del servicio
+   //     List<Vehiculo> vehiculos = vehiculoService.findAllVehiculos();
+        // Agrega la lista al modelo con el nombre "vehiculos"
+   //     model.addAttribute("vehiculos", vehiculos); 
+  //      return "vehiculos/Catalogo_Vehiculos";
+  //  }
 }
 
     

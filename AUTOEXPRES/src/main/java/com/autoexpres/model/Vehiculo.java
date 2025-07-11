@@ -1,208 +1,56 @@
 package com.autoexpres.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import java.math.BigDecimal; // Para el precio
+import jakarta.persistence.Table; // Importación necesaria para @Table
+import lombok.Data;              // Importación de Lombok
+import lombok.NoArgsConstructor;  // Importación de Lombok para constructor sin argumentos
+import lombok.AllArgsConstructor; // Importación de Lombok para constructor con todos los argumentos
 
-@Entity
+import java.math.BigDecimal;    // Para el tipo de dato DECIMAL en el precio
+import java.time.LocalDateTime; // Para el tipo de dato TIMESTAMP en fecha_ingreso
+
+@Entity // Indica que esta clase es una entidad JPA y se mapeará a una tabla de base de datos
+@Table(name = "vehiculos_nuevos") // Especifica el nombre de la tabla en la base de datos
+@Data // Anotación de Lombok: Genera automáticamente getters, setters, toString(), equals(), y hashCode()
+@NoArgsConstructor // Anotación de Lombok: Genera un constructor sin argumentos (necesario para JPA)
+@AllArgsConstructor // Anotación de Lombok: Genera un constructor con todos los argumentos
 public class Vehiculo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Marca esta propiedad como la clave primaria de la entidad
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Configura la estrategia de generación de ID (auto-incremento para MySQL)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50) // 'nullable = false' significa que la columna no puede ser nula. 'length' es opcional pero bueno para VARCHAR.
     private String marca;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String modelo;
 
-    @Column(nullable = false)
-    private String anio; // Puedes usar String o Integer, String es más flexible para "2023.5" si fuera el caso
+    @Column(name = "anio", nullable = false) // Mapea la propiedad 'anio' de Java a la columna 'anio' en la DB
+    private Integer anio; // Se usa Integer para el año, que es más apropiado que String para datos numéricos.
 
-    @Column(nullable = false)
-    private String color;
-
-    @Column(nullable = false)
-    private String tipoCarroceria; // Ej. Sedán, SUV, Hatchback, Coupé
-
-    @Column(nullable = false)
-    private int kilometraje;
-
-    @Column(nullable = false)
-    private String transmision; // Ej. Automática, Manual
-
-    @Column(nullable = false)
-    private String tipoCombustible; // Ej. Gasolina, Diésel, Eléctrico, Híbrido
-
-    @Column(nullable = false)
-    private int numeroAsientos;
-
-    @Column(nullable = false)
-    private int numeroPuertas;
-
-    @Column(nullable = false, precision = 10, scale = 2) // Precision total de 10 dígitos, 2 después del punto decimal
+    @Column(nullable = false, precision = 10, scale = 2) // 'precision' es el número total de dígitos, 'scale' es el número de dígitos después del punto decimal.
     private BigDecimal precio;
 
     @Column(nullable = false)
+    private Integer kilometraje; // Se usa Integer para el kilometraje.
+
+    @Column(name = "tipo_combustible", length = 30) // Mapea 'tipoCombustible' de Java a 'tipo_combustible' en la DB
+    private String tipoCombustible;
+
+    @Column(length = 30)
+    private String transmision;
+
+    @Column(columnDefinition = "TEXT") // Usa 'columnDefinition' para tipos de texto largos
     private String descripcion;
 
-    @Column(nullable = true) // Puede ser nula si no hay imagen
-    private String urlImagen; // URL o ruta a la imagen del vehículo
+    @Column(name = "ruta_imagen", nullable = false, length = 255) // Mapea 'rutaImagen' de Java a 'ruta_imagen' en la DB
+    private String rutaImagen; // Este es el campo que usarás en tu HTML con th:src="${vehiculo.rutaImagen}"
 
-    // Constructores
-    public Vehiculo() {
-    }
-
-    public Vehiculo(String marca, String modelo, String anio, String color, String tipoCarroceria, int kilometraje, String transmision, String tipoCombustible, int numeroAsientos, int numeroPuertas, BigDecimal precio, String descripcion, String urlImagen) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.anio = anio;
-        this.color = color;
-        this.tipoCarroceria = tipoCarroceria;
-        this.kilometraje = kilometraje;
-        this.transmision = transmision;
-        this.tipoCombustible = tipoCombustible;
-        this.numeroAsientos = numeroAsientos;
-        this.numeroPuertas = numeroPuertas;
-        this.precio = precio;
-        this.descripcion = descripcion;
-        this.urlImagen = urlImagen;
-    }
-
-    // Getters y Setters (GENERAR CON TU IDE - Alt+Insert en IntelliJ, Source -> Generate Getters and Setters en Eclipse)
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getAnio() {
-        return anio;
-    }
-
-    public void setAnio(String anio) {
-        this.anio = anio;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getTipoCarroceria() {
-        return tipoCarroceria;
-    }
-
-    public void setTipoCarroceria(String tipoCarroceria) {
-        this.tipoCarroceria = tipoCarroceria;
-    }
-
-    public int getKilometraje() {
-        return kilometraje;
-    }
-
-    public void setKilometraje(int kilometraje) {
-        this.kilometraje = kilometraje;
-    }
-
-    public String getTransmision() {
-        return transmision;
-    }
-
-    public void setTransmision(String transmision) {
-        this.transmision = transmision;
-    }
-
-    public String getTipoCombustible() {
-        return tipoCombustible;
-    }
-
-    public void setTipoCombustible(String tipoCombustible) {
-        this.tipoCombustible = tipoCombustible;
-    }
-
-    public int getNumeroAsientos() {
-        return numeroAsientos;
-    }
-
-    public void setNumeroAsientos(int numeroAsientos) {
-        this.numeroAsientos = numeroAsientos;
-    }
-
-    public int getNumeroPuertas() {
-        return numeroPuertas;
-    }
-
-    public void setNumeroPuertas(int numeroPuertas) {
-        this.numeroPuertas = numeroPuertas;
-    }
-
-    public BigDecimal getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getUrlImagen() {
-        return urlImagen;
-    }
-
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
-
-    @Override
-    public String toString() {
-        return "Vehiculo{" +
-               "id=" + id +
-               ", marca='" + marca + '\'' +
-               ", modelo='" + modelo + '\'' +
-               ", anio='" + anio + '\'' +
-               ", color='" + color + '\'' +
-               ", tipoCarroceria='" + tipoCarroceria + '\'' +
-               ", kilometraje=" + kilometraje +
-               ", transmision='" + transmision + '\'' +
-               ", tipoCombustible='" + tipoCombustible + '\'' +
-               ", numeroAsientos=" + numeroAsientos +
-               ", numeroPuertas=" + numeroPuertas +
-               ", precio=" + precio +
-               ", descripcion='" + descripcion + '\'' +
-               ", urlImagen='" + urlImagen + '\'' +
-               '}';
-    }
+    @Column(name = "fecha_ingreso")
+    private LocalDateTime fechaIngreso; // Para la columna TIMESTAMP en tu DB
 }
