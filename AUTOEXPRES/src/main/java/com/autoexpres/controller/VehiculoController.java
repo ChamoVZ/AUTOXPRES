@@ -55,4 +55,10 @@ public class VehiculoController {
     public String mostrarRenta() {  
         return "renta";
     }
+    
+     @GetMapping("/nosotros")
+    public String sobreNosotros() {
+        return "sobreNosotros"; 
+    }
+    
 }
