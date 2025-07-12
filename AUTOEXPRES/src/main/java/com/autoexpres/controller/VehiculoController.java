@@ -3,6 +3,7 @@ package com.autoexpres.controller;
 import com.autoexpres.model.Vehiculo; 
 import com.autoexpres.service.VehiculoService; 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,17 +77,28 @@ public class VehiculoController {
     }
 
 
-   
+    
     @GetMapping("/vehiculo/{id}")
-    public String verDetallesVehiculo(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
-        return vehiculoService.findVehiculoById(id).map(vehiculo -> {
-            model.addAttribute("vehiculo", vehiculo);
-            return "vehiculos/detalleVehiculo"; 
-        }).orElseGet(() -> {
-            redirectAttributes.addFlashAttribute("error", "Vehículo no encontrado.");
-            return "redirect:/catalogo"; 
-        });
+public String verDetalleVehiculo(@PathVariable Long id, Model model) {
+    Optional<Vehiculo> vehiculoOptional = vehiculoService.findVehiculoById(id);
+    if (vehiculoOptional.isEmpty()) {
+        return "redirect:/vehiculos/catalogo";
     }
+    Vehiculo vehiculo = vehiculoOptional.get();
+    model.addAttribute("vehiculo", vehiculo);
+    return "vehiculos/detalleVehiculo";
+}
+
+@GetMapping("/admin/vehiculos/detalle/{id}")
+public String verDetallesVehiculo(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+    return vehiculoService.findVehiculoById(id).map(vehiculo -> {
+        model.addAttribute("vehiculo", vehiculo);
+        return "vehiculos/detalleVehiculo"; // Podría ser una plantilla diferente, ej. "admin/vehiculos/detalleAdmin"
+    }).orElseGet(() -> {
+        redirectAttributes.addFlashAttribute("error", "Vehículo no encontrado.");
+        return "redirect:/admin/vehiculos"; // Redirigir a la lista de admin si no se encuentra
+    });
+}
 
 
 

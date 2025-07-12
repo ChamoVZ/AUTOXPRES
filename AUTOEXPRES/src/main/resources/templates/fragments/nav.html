@@ -19,10 +19,6 @@
           <a class="nav-link" th:href="@{/alquiler}">Renta de vehículos</a>
         </li>
         
-        <li class="nav-item ms-lg-3"> <a class="btn btn-primary" th:href="@{/admin/vehiculos/nuevo}">
-            <i class="bi bi-plus-circle-fill me-1"></i> Agregar Vehículo
-        </a>
-    </li>
         
         <li class="nav-item">
           <a class="nav-link" th:href="@{/nosotros}">Sobre Nosotros</a>
@@ -30,8 +26,12 @@
         <li class="nav-item">
           <a class="nav-link" th:href="@{/contacto}">Contáctenos</a>
         </li>
+        <li class="nav-item ms-lg-3"> <a class="btn btn-primary" th:href="@{/admin/vehiculos}">
+            <i class="bi bi-plus-circle-fill me-1"></i> Agregar/ Ver Vehículos
+        </a>
+    </li>
         <li class="nav-item">
-          <a class="nav-link btn btn-dark text-white rounded-pill ms-lg-2" th:href="@{/login}">Iniciar Sesión</a>
+          <a class="nav-link btn btn-dark text-red rounded-pill ms-lg-2" th:href="@{/login}">Iniciar Sesión</a>
         </li>
       </ul>
     </div>
