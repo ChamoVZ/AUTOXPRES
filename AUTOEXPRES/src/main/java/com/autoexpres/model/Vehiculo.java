@@ -9,9 +9,9 @@ import jakarta.persistence.Table;
 import lombok.Data;              
 import lombok.NoArgsConstructor;  
 import lombok.AllArgsConstructor; 
-
+import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;    
-import java.time.LocalDateTime; 
+import java.time.LocalDate; 
 
 @Entity 
 @Table(name = "vehiculos_nuevos") 
@@ -51,6 +51,10 @@ public class Vehiculo {
     @Column(name = "ruta_imagen", nullable = false, length = 255) 
     private String rutaImagen; 
 
+    //@Column(name = "fecha_ingreso")
+    //private LocalDateTime fechaIngreso; 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_ingreso")
-    private LocalDateTime fechaIngreso; 
+    private LocalDate fechaIngreso;
+    
 }

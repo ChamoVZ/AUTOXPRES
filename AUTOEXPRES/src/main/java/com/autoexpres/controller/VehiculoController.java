@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+
 
 
 @Controller
@@ -118,14 +121,30 @@ public String verDetallesVehiculo(@PathVariable Long id, Model model, RedirectAt
     }
 
     // Guardar un nuevo vehículo o actualizar uno existente (CREATE/UPDATE - POST)
+//    @PostMapping("/admin/vehiculos/guardar")
+//    public String guardarVehiculo(@ModelAttribute Vehiculo vehiculo, RedirectAttributes redirectAttributes) {
+//        vehiculoService.saveVehiculo(vehiculo);
+//        redirectAttributes.addFlashAttribute("mensaje", "Vehículo guardado exitosamente!");
+//        return "redirect:/admin/vehiculos"; // Redirige a la lista de vehículos
+//    }
     @PostMapping("/admin/vehiculos/guardar")
-    public String guardarVehiculo(@ModelAttribute Vehiculo vehiculo, RedirectAttributes redirectAttributes) {
-        vehiculoService.saveVehiculo(vehiculo);
-        redirectAttributes.addFlashAttribute("mensaje", "Vehículo guardado exitosamente!");
-        return "redirect:/admin/vehiculos"; // Redirige a la lista de vehículos
+public String guardarVehiculo(@Valid @ModelAttribute("vehiculo") Vehiculo vehiculo,
+                              BindingResult result, 
+                              RedirectAttributes redirectAttributes,
+                              Model model) { 
+
+    if (result.hasErrors()) {
+        
+        model.addAttribute("titulo", vehiculo.getId() == null ? "Agregar Nuevo Vehículo" : "Editar Vehículo");
+        return "admin/vehiculos/formVehiculo";
     }
 
-    // Mostrar formulario para editar un vehículo existente (UPDATE - GET)
+    vehiculoService.saveVehiculo(vehiculo);
+    redirectAttributes.addFlashAttribute("mensaje", "Vehículo guardado exitosamente!");
+    return "redirect:/admin/vehiculos"; // Redirige a la lista de vehículos
+}
+    
+
     @GetMapping("/admin/vehiculos/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         return vehiculoService.findVehiculoById(id).map(vehiculo -> {
