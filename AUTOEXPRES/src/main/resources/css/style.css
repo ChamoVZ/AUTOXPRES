@@ -110,3 +110,40 @@
 main {
     padding-bottom: 0px;
 }
+
+
+/* En tu archivo CSS */
+
+.hero-container {
+    position: relative; /* Para que el contenido se posicione sobre la imagen */
+    width: 100%;
+    height: 100vh; /* O la altura que desees para esta sección */
+    overflow: hidden; /* Importante para que la imagen no se desborde */
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ¡Esta es la clave para <img>! */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Para que la imagen quede detrás del contenido */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1; /* Para que el contenido esté por encima de la imagen */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Para que el contenido ocupe todo el espacio del contenedor padre */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para legibilidad */
+    border-radius: 8px;
+    max-width: 800px; /* Limita el ancho del texto */
+    margin: 0 auto; /* Centra el contenido */
+}
