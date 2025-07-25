@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.autoexpres.repository;
 
-/**
- *
- * @author pc
- */
-public interface RentaRepository {
-    
+import com.autoexpres.model.Renta;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface RentaRepository extends JpaRepository<Renta, Long> {
+    // Hereda automáticamente todos los métodos CRUD básicos de JpaRepository:
+    // save(), findById(), findAll(), deleteById(), etc.
 }

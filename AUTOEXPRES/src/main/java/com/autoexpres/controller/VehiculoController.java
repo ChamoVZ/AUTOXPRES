@@ -1,7 +1,9 @@
 package com.autoexpres.controller; 
 
-import com.autoexpres.model.Vehiculo; 
-import com.autoexpres.service.VehiculoService; 
+import com.autoexpres.model.Vehiculo;
+import com.autoexpres.model.Renta; 
+import com.autoexpres.service.VehiculoService;
+import com.autoexpres.service.RentaService; 
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class VehiculoController {
     @Autowired 
     private VehiculoService vehiculoService;
 
+    @Autowired
+    private RentaService rentaService;
    
     @GetMapping("/")
     public String index() {
@@ -176,8 +180,77 @@ public String guardarVehiculo(@Valid @ModelAttribute("vehiculo") Vehiculo vehicu
    //     model.addAttribute("vehiculos", vehiculos); 
   //      return "vehiculos/Catalogo_Vehiculos";
   //  }
+
+  @GetMapping("/admin/rentas")
+    public String listarRentas(Model model) {
+        model.addAttribute("rentas", rentaService.findAllRentas());
+        return "admin/rentas/listaRentas";
+    }
+
+  @GetMapping("/admin/rentas/nuevo")
+public String mostrarFormularioRenta(Model model) {
+    model.addAttribute("renta", new Renta());
+    model.addAttribute("vehiculos", vehiculoService.findAllVehiculos());
+    model.addAttribute("titulo", "Nueva Renta");
+    return "admin/rentas/formRenta";
 }
 
+    @PostMapping("/admin/rentas/guardar")
+    public String guardarRenta(@Valid @ModelAttribute Renta renta, 
+                             BindingResult result,
+                             Model model,
+                             RedirectAttributes redirectAttributes) {
+        
+        if (result.hasErrors()) {
+            model.addAttribute("vehiculos", vehiculoService.findAllVehiculos());
+            model.addAttribute("titulo", renta.getId() == null ? "Nueva Renta" : "Editar Renta");
+            return "admin/rentas/formRenta";
+        }
+        
+        rentaService.saveRenta(renta);
+        redirectAttributes.addFlashAttribute("mensaje", "Renta guardada exitosamente");
+        return "redirect:/admin/rentas";
+    }
+
+    @GetMapping("/admin/rentas/editar/{id}")
+    public String editarRenta(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        Optional<Renta> renta = rentaService.findRentaById(id);
+        
+        if (renta.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Renta no encontrada");
+            return "redirect:/admin/rentas";
+        }
+        
+        model.addAttribute("renta", renta.get());
+        model.addAttribute("vehiculos", vehiculoService.findAllVehiculos());
+        model.addAttribute("titulo", "Editar Renta");
+        return "admin/rentas/formRenta";
+    }
+
+    @GetMapping("/admin/rentas/eliminar/{id}")
+    public String eliminarRenta(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            rentaService.deleteRentaById(id);
+            redirectAttributes.addFlashAttribute("mensaje", "Renta eliminada exitosamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al eliminar renta: " + e.getMessage());
+        }
+        return "redirect:/admin/rentas";
+    }
+    
+    @GetMapping("/admin/rentas/detalle/{id}")
+    public String detalleRenta(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        return rentaService.findRentaById(id).map(renta -> {
+            model.addAttribute("renta", renta);
+            return "admin/rentas/detalleRenta";
+        }).orElseGet(() -> {
+            redirectAttributes.addFlashAttribute("error", "Renta no encontrada");
+            return "redirect:/admin/rentas";
+        });
+    }
+    
+   
+}
     
    
 
