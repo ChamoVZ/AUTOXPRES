@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS vehiculos_alquiler (
     ruta_imagen TEXT, 
     fecha_adquisicion DATE
 );
+ALTER TABLE vehiculos_alquiler RENAME TO rentas_vehiculos;
 
 
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -67,6 +68,6 @@ GRANT ALL PRIVILEGES ON autoxpres_db.* TO 'AutoXpres'@'localhost';
 FLUSH PRIVILEGES;
 
 DESCRIBE vehiculos_nuevos;
-
+SHOW TABLES;
 ALTER TABLE vehiculos_nuevos
 MODIFY COLUMN ruta_imagen TEXT NOT NULL;
