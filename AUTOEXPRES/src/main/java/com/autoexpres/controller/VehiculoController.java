@@ -83,7 +83,10 @@ public class VehiculoController {
         return "sobreNosotros"; 
     }
 
-
+@GetMapping("/contactenos")
+    public String mostrarFormularioContacto() {
+        return "contactenos"; // Va a buscar templates/contactenos.html
+    }
     
     @GetMapping("/vehiculo/{id}")
 public String verDetalleVehiculo(@PathVariable Long id, Model model) {
