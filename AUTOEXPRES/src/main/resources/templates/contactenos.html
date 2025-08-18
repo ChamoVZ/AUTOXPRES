@@ -14,22 +14,8 @@
 
 <!-- HEADER -->
 <header>
-    <div class="container-fluid">
-        <div class="row bg-dark text-white p-3">
-            <div class="col-md-4">
-                <h1 class="logo">AutoXpres</h1>
-            </div>
-            <div class="col-md-8 text-end">
-                <nav>
-                    <a th:href="@{/}" class="link-light me-3">Inicio</a>
-                    <a th:href="@{/sobreNosotros}" class="link-light me-3">Sobre Nosotros</a>
-                    <a th:href="@{/catalogo}" class="link-light me-3">Catálogo</a>
-                    <a th:href="@{/contactenos}" class="link-light fw-bold">Contáctenos</a>
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+        <div th:replace="~{fragments/nav :: nav}"></div>
+    </header>
 
 <!-- CONTENIDO PRINCIPAL -->
 <main class="container my-5">
@@ -86,12 +72,17 @@
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-dark text-white text-center py-3 mt-5">
-    <p class="mb-0">© 2025 AutoXpres - Todos los derechos reservados</p>
-</footer>
+<footer>
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </footer>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+ <div th:replace="~{fragments/modal-auth :: auth-modals}"></div>
+
+    <script src="/js/main.js"></script>
+
 </body>
 </html>
 
