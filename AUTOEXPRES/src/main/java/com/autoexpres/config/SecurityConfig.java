@@ -30,6 +30,25 @@ public class SecurityConfig {
                     "/alquiler",
                     "/nosotros",
                     "/contactenos",
+                    "/renta",
+                   //aqui empiezo lo de admin
+                    "/vehiculo/{id}",
+                    "/admin/vehiculos/detalle/{id}",
+                    "/admin/vehiculos",
+                    "/admin/vehiculos/nuevo",
+                    "/admin/vehiculos/guardar",
+                    "/admin/vehiculos/editar/{id}",
+                    "/admin/vehiculos/eliminar/{id}",
+                    "/admin/vehiculos/eliminar/{id}",
+                    "/admin/rentas",
+                    "/admin/rentas/nuevo",
+                    "/admin/rentas/guardar",
+                    "/admin/rentas/editar/{id}",
+                    "/admin/rentas/eliminar/{id}",
+                    "/admin/rentas/detalle/{id}",
+                    "admin/rentas/listaRentas",
+                    "/admin/vehiculos",
+                    //aqui termina lo e admin
                     "/detallevehiculo",
                     "/css/**",
                     "/js/**",
@@ -39,7 +58,7 @@ public class SecurityConfig {
                 ).permitAll()
                 
                 // Rutas protegidas que solo pueden ser accedidas por usuarios con rol "ADMIN"
-                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/adminn/**").hasRole("ADMIN")
                 
                 // Cualquier otra solicitud requiere autenticación
                 .anyRequest().authenticated()
