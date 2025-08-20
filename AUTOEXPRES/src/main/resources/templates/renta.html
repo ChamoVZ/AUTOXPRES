@@ -181,35 +181,39 @@
                     <!-- Iteración sobre las rentas del CRUD -->
                     <div class="col-lg-4 col-md-6 vehicle-col" th:each="renta : ${rentas}">
                         <div class="card vehicle-card">
-                            <img th:src="@{${renta.vehiculo.rutaImagen}}" class="card-img-top vehicle-img" 
-                                 th:alt="${renta.vehiculo.marca} + ' ' + ${renta.vehiculo.modelo}" 
+                            <img th:src="@{${renta.rutaImagen}}" class="card-img-top vehicle-img" 
+                                 th:alt="${renta.marca} + ' ' + ${renta.modelo}" 
                                  onerror="this.onerror=null;this.src='/images/placeholder.png';">
                             <div class="card-body">
-                                <h3 class="vehicle-title" th:text="${renta.vehiculo.marca} + ' ' + ${renta.vehiculo.modelo}">
+                                <h3 class="vehicle-title" th:text="${renta.marca} + ' ' + ${renta.modelo}">
                                     [Nombre del Vehículo]
                                 </h3>
                                 
                                 <p class="vehicle-specs">
-                                    <strong>Año:</strong> <span th:text="${renta.vehiculo.anio}">[Año]</span> -
-                                    <strong>KM:</strong> <span th:text="${renta.vehiculo.kilometraje}">[KM]</span>
+                                    <strong>Año:</strong> <span th:text="${renta.anio}">[Año]</span>
                                 </p>
                                 
                                 <div class="rent-label">DISFRUTALO DESDE:</div>
-                                <div class="monthly-price" th:text="'$' + ${#numbers.formatDecimal(renta.precioMensual, 1, 2)} + '/MES*'">
+                                <div class="monthly-price" th:text="'$' + ${#numbers.formatDecimal(renta.precioPorDia * 30, 1, 2)} + '/MES*'">
                                     [Precio mensual]
                                 </div>
                                 
-                                <div class="purchase-label">Precio de compra:</div>
-                                <div class="price-amount" th:text="'$' + ${#numbers.formatDecimal(renta.vehiculo.precio, 1, 2)}">
+                                <div class="purchase-label">Precio de compra estimado:</div>
+                                <div class="price-amount" th:text="'$' + ${#numbers.formatDecimal(renta.precioPorDia * 365, 1, 2)}">
                                     [Precio de compra]
                                 </div>
                                 
-                                <a th:href="@{/renta/{id}(id=${renta.id})}" class="info-btn">Solicitar información</a>
+                                <a th:href="@{/vehiculo/{id}(id=${renta.id})}" class="info-btn">Solicitar información</a>
                                 <p class="disclaimer">*Precio sujeto a condiciones y disponibilidad</p>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Mensaje si no hay rentas disponibles -->
+            <div th:if="${#lists.isEmpty(rentas)}" class="text-center mt-5">
+                <p class="text-muted">Actualmente no hay vehículos disponibles para renta.</p>
             </div>
         </div>
     </div>
