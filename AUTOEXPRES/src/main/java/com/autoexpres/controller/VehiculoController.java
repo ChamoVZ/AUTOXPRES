@@ -84,6 +84,10 @@ public String mostrarRenta(Model model) {
     public String mostrarNosotros() {
         return "sobreNosotros"; 
     }
+    @GetMapping("/contactenos")
+    public String mostrarcontactenos() {
+        return "contactenos"; 
+    }
 
 
     
