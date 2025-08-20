@@ -31,6 +31,7 @@ public class SecurityConfig {
                     "/nosotros",
                     "/contactenos",
                     "/renta",
+                    "vehiculos/Catalogo_Vehiculos",
                    //aqui empiezo lo de admin
                     "/vehiculo/{id}",
                     "/admin/vehiculos/detalle/{id}",
@@ -47,7 +48,7 @@ public class SecurityConfig {
                     "/admin/rentas/eliminar/{id}",
                     "/admin/rentas/detalle/{id}",
                     "admin/rentas/listaRentas",
-                    "/vehiculo/{id}",
+                    "/vehiculo/{id}(id=${vehiculo.id}",
                     //aqui termina lo e admin
                     "/detallevehiculo",
                     "/css/**",
