@@ -77,7 +77,7 @@
                     <div class="col-md-6 mb-3">
                         <label for="telefono" class="form-label fw-bold">Teléfono:</label>
                         <input type="tel" id="telefono" th:field="*{telefono}" 
-                               class="form-control" placeholder="1234-5678" required>
+                               class="form-control" placeholder="12345678" required>
                         <div class="text-danger" th:if="${#fields.hasErrors('telefono')}" 
                              th:errors="*{telefono}"></div>
                     </div>
@@ -89,13 +89,14 @@
                               rows="4" placeholder="¿Tiene alguna pregunta específica?"></textarea>
                 </div>
                 
+                <!-- BOTONES CORREGIDOS -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a th:href="@{/alquiler}" class="btn btn-secondary me-md-2">
                         <i class="bi bi-arrow-left"></i> Volver
                     </a>
-                      <li class="nav-item">
-                    <a class="nav-link" th:href="@{mensaje}">Enviar solicitud</a>
-                </li>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send"></i> Enviar Solicitud
+                    </button>
                 </div>
             </form>
         </div>

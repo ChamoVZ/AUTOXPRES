@@ -252,19 +252,19 @@ public class VehiculoController {
     }
 
     // Procesar el formulario de solicitud
-    @PostMapping("/renta/solicitar")
-    public String procesarSolicitud(@Valid @ModelAttribute("solicitud") SolicitudesRenta solicitud, // Nombre cambiado
-                                  BindingResult result, 
-                                  RedirectAttributes redirectAttributes) {
-        
-        if (result.hasErrors()) {
-            return "admin/renta/FormRentaSolicitudes";
-        }
-        
-        solicitudesRentaRepo.save(solicitud); // Nombre cambiado
-        redirectAttributes.addFlashAttribute("mensaje", "¡Solicitud enviada con éxito! Nos contactaremos contigo pronto.");
-        return "redirect:/alquiler";
+  @PostMapping("/renta/solicitar")
+public String procesarSolicitud(@Valid @ModelAttribute("solicitud") SolicitudesRenta solicitud, 
+                              BindingResult result, 
+                              RedirectAttributes redirectAttributes) {
+    
+    if (result.hasErrors()) {
+        return "admin/rentas/FormRentaSolicitudes";
     }
+    
+    solicitudesRentaRepo.save(solicitud);
+    redirectAttributes.addFlashAttribute("mensaje", "¡Solicitud enviada con éxito! Nos contactaremos contigo pronto.");
+    return "redirect:/alquiler";
+}
 
     // Para la sección administrativa - ver todas las solicitudes
     @GetMapping("/admin/solicitudes")
