@@ -43,16 +43,14 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" th:href="@{/perfil}">Mi Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a></li>
+                        <li><a th : href="@{/logout}">Cerrar Sesión</a> </li>
                     </ul>
                 </li>
                   <li class="nav-item" sec:authorize="!isAuthenticated()">
-                 
-                    <a class="nav-link btn btn-dark text-red rounded-pill ms-lg-2" href="#" onclick="abrirModal('login-modal');">
+                    <a class="nav-link btn btn-dark text-red rounded-pill ms-lg-2" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
                         Iniciar Sesión
                     </a>
-                      
-                       <a class="nav-link btn btn-dark text-red rounded-pill ms-lg-2" href="#" onclick="abrirModal('registro-modal');">
+                    <a class="nav-link btn btn-dark text-red rounded-pill ms-lg-2" href="#" data-bs-toggle="modal" data-bs-target="#registroModal">
                         Registrarse
                     </a>
                 </li>
@@ -60,3 +58,10 @@
         </div> 
     </div>
 </nav>
+<script>
+    // Esta función ya no es necesaria con data-bs-toggle, pero la mantengo como ejemplo
+    function abrirModal(idModal) {
+        var myModal = new bootstrap.Modal(document.getElementById(idModal));
+        myModal.show();
+    }
+</script>

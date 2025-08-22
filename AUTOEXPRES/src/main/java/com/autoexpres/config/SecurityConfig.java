@@ -22,89 +22,84 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(authorize -> authorize
+                .authorizeHttpRequests(authorize -> authorize
                 // Rutas públicas accesibles por cualquier persona
                 .requestMatchers(
-                    
-                    "/", 
-                    "/perfil",
-                    "/catalogo",
-                    "/registro",
-                    "/alquiler",
-                    "/nosotros",
-                    "/contactenos",
-                    "/renta",
-                    "/cotizacion/porsche-911",
-                    "/cotizacion/touareg-r",
-                    "/cotizacion/bmw-m850i",
-                    "/cotizacion/bmw-x6",
-                    "/cotizacion/panamera",
-                    "/cotizacion/audi-a6",
-                    "vehiculos/Catalogo_Vehiculos",
-                   //aqui empiezo lo de admin
-                    "/vehiculo/{id}",
-                    "/admin/vehiculos/detalle/{id}",
-                    "/admin/vehiculos",
-                    "/admin/vehiculos/nuevo",
-                    "/admin/vehiculos/guardar",
-                    "/admin/vehiculos/editar/{id}",
-                    "/admin/vehiculos/eliminar/{id}",
-                    "/admin/rentas",
-                    "/admin/rentas/nuevo",
-                    "/admin/rentas/guardar",
-                    "/admin/rentas/editar/{id}",
-                    "/admin/rentas/eliminar/{id}",
-                    "/admin/rentas/detalle/{id}",
-                    "admin/rentas/listaRentas",
-                    
-                    
-                    "/renta/solicitar/{vehiculo}",
-                    "/renta/solicitar",
-                    "/admin/solicitudes",
-                    "admin/rentas/FormRentaSolicitudes",
-
-                    "admin/rentas/FormRentaSolicitudes",
-                    "admin/rentas/ListaRentasSolicitudes",
-                    "admin/renta/FormRentaSolicitudes",
-                    "admin/rentas/ListaRentaSolicitudes",
-                    "/cotizacion/{vehiculo}",
-                    "/vehiculos/formCotizacion",
-                    "/cotizacion/enviar",
-                    "/admin/cotizaciones",
-                    "admin/cotizaciones/listaCotizaciones",
-                    "/cotizacion/audi-a6",
-                    "vehiculos/Audi_A6",
-
-                    //aqui termina lo e admin
-                    "/detallevehiculo",
-                    "/css/**",
-                    "/js/**",
-                    "/images/**",
-                    "/vehiculos/detalle/**",
-                    "/login" // Permite el acceso a la página de login
+                        "/",
+                        "/perfil",
+                        "/catalogo",
+                        "/registro",
+                        "/alquiler",
+                        "/nosotros",
+                        "/contactenos",
+                        "/renta",
+                        "/cotizacion/porsche-911",
+                        "/cotizacion/touareg-r",
+                        "/cotizacion/bmw-m850i",
+                        "/cotizacion/bmw-x6",
+                        "/cotizacion/panamera",
+                        "/cotizacion/audi-a6",
+                        "vehiculos/Catalogo_Vehiculos",
+                        //aqui empiezo lo de admin
+                        "/vehiculo/{id}",
+                        "/admin/vehiculos/detalle/{id}",
+                        "/admin/vehiculos",
+                        "/admin/vehiculos/nuevo",
+                        "/admin/vehiculos/guardar",
+                        "/admin/vehiculos/editar/{id}",
+                        "/admin/vehiculos/eliminar/{id}",
+                        "/admin/rentas",
+                        "/admin/rentas/nuevo",
+                        "/admin/rentas/guardar",
+                        "/admin/rentas/editar/{id}",
+                        "/admin/rentas/eliminar/{id}",
+                        "/admin/rentas/detalle/{id}",
+                        "admin/rentas/listaRentas",
+                        "/renta/solicitar/{vehiculo}",
+                        "/renta/solicitar",
+                        "/admin/solicitudes",
+                        "admin/rentas/FormRentaSolicitudes",
+                        "admin/rentas/FormRentaSolicitudes",
+                        "admin/rentas/ListaRentasSolicitudes",
+                        "admin/renta/FormRentaSolicitudes",
+                        "admin/rentas/ListaRentaSolicitudes",
+                        "/cotizacion/{vehiculo}",
+                        "/vehiculos/formCotizacion",
+                        "/cotizacion/enviar",
+                        "/admin/cotizaciones",
+                        "admin/cotizaciones/listaCotizaciones",
+                        "/cotizacion/audi-a6",
+                        "vehiculos/Audi_A6",
+                        //aqui termina lo e admin
+                        "/detallevehiculo",
+                        "/css/**",
+                        "/js/**",
+                        "/images/**",
+                        "/vehiculos/detalle/**",
+                        "/login" // Permite el acceso a la página de login
                 ).permitAll()
-                
                 // Rutas protegidas que solo pueden ser accedidas por usuarios con rol "ADMIN"
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                
                 // Cualquier otra solicitud requiere autenticación
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
+                .requestMatchers("/perfil").authenticated()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(formLogin -> formLogin
+                .loginPage("/")
                 .defaultSuccessUrl("/", true)
                 .permitAll()
-            )
-            .oauth2Login(oauth2 -> oauth2
-                .loginPage("/login") 
-                .userInfoEndpoint(userInfo -> userInfo
-                    .userService(customOAuth2UserService)
                 )
-            )
-            .logout(logout -> logout
+                .oauth2Login(oauth2Login -> oauth2Login
+                .loginPage("/")
+                .userInfoEndpoint(userInfo -> userInfo
+                .userService(customOAuth2UserService)
+                )
+                )
+                .logout(logout -> logout
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .permitAll()
-            );
+                );
 
         return http.build();
     }
