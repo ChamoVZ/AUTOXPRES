@@ -55,28 +55,7 @@ public class VehiculoController {
     public String mostrarCotizacionPorsche911() {
         return "vehiculos/porche_911";
     }
-
-    @GetMapping("/cotizacion/touareg-r")
-    public String mostrarCotizacionTouareg() {
-        return "vehiculos/Volkswagen_Touareg";
-    }
-
-    @GetMapping("/cotizacion/bmw-m850i")
-    public String mostrarCotizacionBMWM850i() {
-        return "vehiculos/BMW_Serie8";
-    }
-
-    @GetMapping("/cotizacion/bmw-x6")
-    public String mostrarCotizacionBMWX6() {
-        return "vehiculos/BMW_X6";
-    }
-
-    @GetMapping("/cotizacion/panamera")
-    public String mostrarCotizacionPanamera() {
-        return "vehiculos/Porshe_Panamera";
-    }
-
-    // Endpoint para la renta
+   // Endpoint para la renta
     @GetMapping("/alquiler")
     public String mostrarRenta(Model model) {
         List<Renta> rentas = rentaService.findAllRentas();
@@ -286,12 +265,76 @@ public class VehiculoController {
     }
 
 // Nueva ruta específica para Audi A6
+<<<<<<< Updated upstream
     @GetMapping("/cotizacion/audi-a6")
     public String mostrarAudiA6(Model model) {
         CotizacionVehiculo cotizacion = new CotizacionVehiculo();
         cotizacion.setVehiculoInteres("Audi A6 Avant");
         model.addAttribute("cotizacion", cotizacion);
         return "vehiculos/Audi_A6"; // Para página específica con formulario integrado
+=======
+@GetMapping("/cotizacion/audi-a6")
+public String mostrarAudiA6(Model model) {
+    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
+    cotizacion.setVehiculoInteres("Audi A6 Avant");
+    model.addAttribute("cotizacion", cotizacion);
+    return "vehiculos/Audi_A6"; // Para página específica con formulario integrado
+}
+
+@GetMapping("/cotizacion/bmw-m850i")
+public String mostrarBMWSerie8(Model model) {
+    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
+    cotizacion.setVehiculoInteres("BMW Serie 8 M850i xDrive");
+    model.addAttribute("cotizacion", cotizacion);
+    return "vehiculos/BMW_Serie8";
+}
+// Ruta específica para BMW X6
+@GetMapping("/cotizacion/bmw-x6")
+public String mostrarBMWX6(Model model) {
+    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
+    cotizacion.setVehiculoInteres("BMW X6");
+    model.addAttribute("cotizacion", cotizacion);
+    return "vehiculos/BMW_X6";
+}
+
+// Ruta específica para Porsche Panamera
+@GetMapping("/cotizacion/panamera")
+public String mostrarPorschePanamera(Model model) {
+    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
+    cotizacion.setVehiculoInteres("Porsche Panamera");
+    model.addAttribute("cotizacion", cotizacion);
+    return "vehiculos/Porshe_Panamera";
+}
+// Ruta específica para Volkswagen Touareg
+@GetMapping("/cotizacion/touareg-r")
+public String mostrarVolkswagenTouareg(Model model) {
+    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
+    cotizacion.setVehiculoInteres("Volkswagen Touareg R");
+    model.addAttribute("cotizacion", cotizacion);
+    return "vehiculos/Volkswagen_Touareg";
+}
+
+@PostMapping("/cotizacion/enviar")
+public String procesarCotizacion(@Valid @ModelAttribute("cotizacion") CotizacionVehiculo cotizacion, 
+                               BindingResult result, 
+                               RedirectAttributes redirectAttributes) {
+    
+    if (result.hasErrors()) {
+        // Determinar a qué página regresar basado en el vehículo
+        if ("Audi A6 Avant".equals(cotizacion.getVehiculoInteres())) {
+            return "vehiculos/Audi_A6";
+         } else if ("BMW Serie 8 M850i xDrive".equals(cotizacion.getVehiculoInteres())) {
+            return "vehiculos/BMW_Serie8";
+        } else if ("BMW X6".equals(cotizacion.getVehiculoInteres())) {
+            return "vehiculos/BMW_X6";
+        } else if ("Porsche Panamera".equals(cotizacion.getVehiculoInteres())) {
+            return "vehiculos/Porshe_Panamera";
+        } else if ("Volkswagen Touareg R".equals(cotizacion.getVehiculoInteres())) {
+            return "vehiculos/Volkswagen_Touareg";
+        } else {
+            return "vehiculos/formCotizacion";
+        }
+>>>>>>> Stashed changes
     }
 
     @PostMapping("/cotizacion/enviar")

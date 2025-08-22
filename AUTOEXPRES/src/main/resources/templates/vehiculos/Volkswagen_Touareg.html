@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cotización Volkswagen Touareg eHybrid</title>
     <meta charset="UTF-8">
@@ -41,6 +41,22 @@
             padding: 10px 25px;
             background-color: #0d6efd;
             border-color: #0d6efd;
+        }
+        .text-danger {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .form-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -97,24 +113,52 @@
                         </ul>
                     </div>
 
-                    <div class="text-center mt-5">
-                        <h4 class="mb-4">Complete el formulario para cotizar</h4>
-                        <form>
+                    <!-- FORMULARIO DE COTIZACIÓN -->
+                    <div class="form-section">
+                        <h4 class="form-title">Complete el formulario para cotizar</h4>
+                        
+                        <form th:action="@{/cotizacion/enviar}" th:object="${cotizacion}" method="post">
+                            <!-- Campo hidden para el vehículo -->
+                            <input type="hidden" th:field="*{vehiculoInteres}">
+                            
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" placeholder="Nombre completo" required>
+                                    <label class="form-label fw-bold">Nombre</label>
+                                    <input type="text" class="form-control" th:field="*{nombre}" 
+                                           placeholder="Ingrese su nombre" required>
+                                    <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" 
+                                         th:errors="*{nombre}"></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" class="form-control" placeholder="Correo electrónico" required>
+                                    <label class="form-label fw-bold">Apellido</label>
+                                    <input type="text" class="form-control" th:field="*{apellido}" 
+                                           placeholder="Ingrese su apellido" required>
+                                    <div class="text-danger" th:if="${#fields.hasErrors('apellido')}" 
+                                         th:errors="*{apellido}"></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="tel" class="form-control" placeholder="Teléfono">
+                                    <label class="form-label fw-bold">Correo electrónico</label>
+                                    <input type="email" class="form-control" th:field="*{email}" 
+                                           placeholder="ejemplo@correo.com" required>
+                                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" 
+                                         th:errors="*{email}"></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" placeholder="Mensaje adicional">
+                                    <label class="form-label fw-bold">Teléfono</label>
+                                    <input type="tel" class="form-control" th:field="*{telefono}" 
+                                           placeholder="12345678" required>
+                                    <div class="text-danger" th:if="${#fields.hasErrors('telefono')}" 
+                                         th:errors="*{telefono}"></div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-cotizar">Enviar solicitud</button>
+                                    <label class="form-label fw-bold">Mensaje adicional (opcional)</label>
+                                    <textarea class="form-control" th:field="*{mensaje}" 
+                                              placeholder="¿Tiene alguna pregunta específica sobre este vehículo?" rows="3"></textarea>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary btn-cotizar">
+                                        <i class="bi bi-send"></i> Enviar solicitud
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -124,7 +168,7 @@
         </div>
     </div>
 
-        <footer>
+    <footer>
         <div th:replace="~{fragments/footer :: footer}"></div>
     </footer>
     
