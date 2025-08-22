@@ -112,6 +112,22 @@
                 max-width: 100%;
             }
         }
+        
+        /* Modal styles */
+        .modal-content {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+        .modal-header {
+            background-color: #0d6efd;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .btn-close {
+            filter: invert(1);
+        }
     </style>
 </head>
 <body>
@@ -135,7 +151,9 @@
                             <div class="monthly-price">$644/MES*</div>
                             <div class="purchase-label">Precio de compra:</div>
                             <div class="price-amount">$68,500.00</div>
-                            <a href="#" class="info-btn">Solicitar información</a>
+                            <button type="button" class="info-btn" data-bs-toggle="modal" data-bs-target="#solicitudModal" data-vehiculo="BMW X8 xDrive 30d N">
+                                Solicitar información
+                            </button>
                             <p class="disclaimer">*Precio sujeto a condiciones y disponibilidad</p>
                         </div>
                     </div>
@@ -151,7 +169,9 @@
                             <div class="monthly-price">$1,014/MES*</div>
                             <div class="purchase-label">Precio de compra:</div>
                             <div class="price-amount">$108,950.00</div>
-                            <a href="#" class="info-btn">Solicitar información</a>
+                            <button type="button" class="info-btn" data-bs-toggle="modal" data-bs-target="#solicitudModal" data-vehiculo="Porsche Panamera CTS">
+                                Solicitar información
+                            </button>
                             <p class="disclaimer">*Precio sujeto a condiciones y disponibilidad</p>
                         </div>
                     </div>
@@ -167,7 +187,9 @@
                             <div class="monthly-price">$385/MES*</div>
                             <div class="purchase-label">Precio de compra:</div>
                             <div class="price-amount">$34,590.00</div>
-                            <a href="#" class="info-btn">Solicitar información</a>
+                            <button type="button" class="info-btn" data-bs-toggle="modal" data-bs-target="#solicitudModal" data-vehiculo="Mercedes Clase C 300de Estate AUC Line">
+                                Solicitar información
+                            </button>
                             <p class="disclaimer">*Precio sujeto a condiciones y disponibilidad</p>
                         </div>
                     </div>
@@ -203,7 +225,10 @@
                                     [Precio de compra]
                                 </div>
                                 
-                                <a th:href="@{/vehiculo/{id}(id=${renta.id})}" class="info-btn">Solicitar información</a>
+                                <button type="button" class="info-btn" data-bs-toggle="modal" data-bs-target="#solicitudModal" 
+                                        th:attr="data-vehiculo=${renta.marca + ' ' + renta.modelo}">
+                                    Solicitar información
+                                </button>
                                 <p class="disclaimer">*Precio sujeto a condiciones y disponibilidad</p>
                             </div>
                         </div>
@@ -218,10 +243,59 @@
         </div>
     </div>
 
+    <!-- Modal para solicitar información -->
+    <div class="modal fade" id="solicitudModal" tabindex="-1" aria-labelledby="solicitudModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="solicitudModalLabel">Solicitar Información</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="solicitudForm" th:action="@{/renta/solicitar}" method="post">
+                        <input type="hidden" id="vehiculoInteres" name="vehiculoInteres" value="">
+                        
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">Mensaje (opcional)</label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="solicitudForm" class="btn btn-primary">Enviar Solicitud</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div th:replace="~{fragments/footer :: footer}"></div>
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+ 
+ 
 </body>
 </html>

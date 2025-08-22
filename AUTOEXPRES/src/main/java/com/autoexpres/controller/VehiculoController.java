@@ -2,6 +2,8 @@ package com.autoexpres.controller;
 
 import com.autoexpres.model.Vehiculo;
 import com.autoexpres.model.Renta; 
+import com.autoexpres.model.SolicitudesRenta; // Nombre cambiado
+import com.autoexpres.repository.SolicitudesRentaRepo; // Nombre cambiado
 import com.autoexpres.service.VehiculoService;
 import com.autoexpres.service.RentaService; 
 import java.util.List;
@@ -14,11 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 
-
-
 @Controller
 @RequestMapping("")
-
 public class VehiculoController {
 
     @Autowired 
@@ -26,7 +25,10 @@ public class VehiculoController {
 
     @Autowired
     private RentaService rentaService;
-   
+    
+    @Autowired
+    private SolicitudesRentaRepo solicitudesRentaRepo; // Nombre cambiado
+
     @GetMapping("/")
     public String index() {
         return "index"; 
@@ -40,11 +42,9 @@ public class VehiculoController {
     @GetMapping("/catalogo")
     public String mostrarCatalogo(Model model) {
         List<Vehiculo> vehiculos = vehiculoService.findAllVehiculos();
-
         model.addAttribute("vehiculos", vehiculos); 
         return "vehiculos/Catalogo_Vehiculos"; 
     }
-
 
     @GetMapping("/cotizacion/porsche-911")
     public String mostrarCotizacionPorsche911() {
@@ -78,46 +78,43 @@ public class VehiculoController {
 
     // Endpoint para la renta
     @GetMapping("/alquiler")
-public String mostrarRenta(Model model) {
-    List<Renta> rentas = rentaService.findAllRentas();
-    model.addAttribute("rentas", rentas);
-    return "renta"; 
-}
+    public String mostrarRenta(Model model) {
+        List<Renta> rentas = rentaService.findAllRentas();
+        model.addAttribute("rentas", rentas);
+        return "renta"; 
+    }
 
     @GetMapping("/nosotros")
     public String mostrarNosotros() {
         return "sobreNosotros"; 
     }
+    
     @GetMapping("/contactenos")
     public String mostrarcontactenos() {
         return "contactenos"; 
     }
 
-
-    
     @GetMapping("/vehiculo/{id}")
-public String verDetalleVehiculo(@PathVariable Long id, Model model) {
-    Optional<Vehiculo> vehiculoOptional = vehiculoService.findVehiculoById(id);
-    if (vehiculoOptional.isEmpty()) {
-        return "redirect:/vehiculos/catalogo";
-    }
-    Vehiculo vehiculo = vehiculoOptional.get();
-    model.addAttribute("vehiculo", vehiculo);
-    return "vehiculos/detalleVehiculo";
-}
-
-@GetMapping("/admin/vehiculos/detalle/{id}")
-public String verDetallesVehiculo(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
-    return vehiculoService.findVehiculoById(id).map(vehiculo -> {
+    public String verDetalleVehiculo(@PathVariable Long id, Model model) {
+        Optional<Vehiculo> vehiculoOptional = vehiculoService.findVehiculoById(id);
+        if (vehiculoOptional.isEmpty()) {
+            return "redirect:/vehiculos/catalogo";
+        }
+        Vehiculo vehiculo = vehiculoOptional.get();
         model.addAttribute("vehiculo", vehiculo);
-        return "vehiculos/detalleVehiculo"; // Podría ser una plantilla diferente, ej. "admin/vehiculos/detalleAdmin"
-    }).orElseGet(() -> {
-        redirectAttributes.addFlashAttribute("error", "Vehículo no encontrado.");
-        return "redirect:/admin/vehiculos"; // Redirigir a la lista de admin si no se encuentra
-    });
-}
+        return "vehiculos/detalleVehiculo";
+    }
 
-
+    @GetMapping("/admin/vehiculos/detalle/{id}")
+    public String verDetallesVehiculo(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        return vehiculoService.findVehiculoById(id).map(vehiculo -> {
+            model.addAttribute("vehiculo", vehiculo);
+            return "vehiculos/detalleVehiculo";
+        }).orElseGet(() -> {
+            redirectAttributes.addFlashAttribute("error", "Vehículo no encontrado.");
+            return "redirect:/admin/vehiculos";
+        });
+    }
 
     // Listar todos los vehículos (READ)
     @GetMapping("/admin/vehiculos")
@@ -135,36 +132,28 @@ public String verDetallesVehiculo(@PathVariable Long id, Model model, RedirectAt
     }
 
     // Guardar un nuevo vehículo o actualizar uno existente (CREATE/UPDATE - POST)
-//    @PostMapping("/admin/vehiculos/guardar")
-//    public String guardarVehiculo(@ModelAttribute Vehiculo vehiculo, RedirectAttributes redirectAttributes) {
-//        vehiculoService.saveVehiculo(vehiculo);
-//        redirectAttributes.addFlashAttribute("mensaje", "Vehículo guardado exitosamente!");
-//        return "redirect:/admin/vehiculos"; // Redirige a la lista de vehículos
-//    }
     @PostMapping("/admin/vehiculos/guardar")
-public String guardarVehiculo(@Valid @ModelAttribute("vehiculo") Vehiculo vehiculo,
-                              BindingResult result, 
-                              RedirectAttributes redirectAttributes,
-                              Model model) { 
+    public String guardarVehiculo(@Valid @ModelAttribute("vehiculo") Vehiculo vehiculo,
+                                  BindingResult result, 
+                                  RedirectAttributes redirectAttributes,
+                                  Model model) { 
 
-    if (result.hasErrors()) {
-        
-        model.addAttribute("titulo", vehiculo.getId() == null ? "Agregar Nuevo Vehículo" : "Editar Vehículo");
-        return "admin/vehiculos/formVehiculo";
+        if (result.hasErrors()) {
+            model.addAttribute("titulo", vehiculo.getId() == null ? "Agregar Nuevo Vehículo" : "Editar Vehículo");
+            return "admin/vehiculos/formVehiculo";
+        }
+
+        vehiculoService.saveVehiculo(vehiculo);
+        redirectAttributes.addFlashAttribute("mensaje", "Vehículo guardado exitosamente!");
+        return "redirect:/admin/vehiculos";
     }
-
-    vehiculoService.saveVehiculo(vehiculo);
-    redirectAttributes.addFlashAttribute("mensaje", "Vehículo guardado exitosamente!");
-    return "redirect:/admin/vehiculos"; // Redirige a la lista de vehículos
-}
-    
 
     @GetMapping("/admin/vehiculos/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         return vehiculoService.findVehiculoById(id).map(vehiculo -> {
             model.addAttribute("vehiculo", vehiculo);
             model.addAttribute("titulo", "Editar Vehículo");
-            return "admin/vehiculos/formVehiculo"; // Vista: templates/admin/vehiculos/formVehiculo.html
+            return "admin/vehiculos/formVehiculo";
         }).orElseGet(() -> {
             redirectAttributes.addFlashAttribute("error", "Vehículo no encontrado para edición.");
             return "redirect:/admin/vehiculos";
@@ -182,28 +171,20 @@ public String guardarVehiculo(@Valid @ModelAttribute("vehiculo") Vehiculo vehicu
         }
         return "redirect:/admin/vehiculos";
     }
-   // @GetMapping("/catalogo")
-   // public String mostrarCatalogo(Model model) {
-        // Obtiene todos los vehículos del servicio
-   //     List<Vehiculo> vehiculos = vehiculoService.findAllVehiculos();
-        // Agrega la lista al modelo con el nombre "vehiculos"
-   //     model.addAttribute("vehiculos", vehiculos); 
-  //      return "vehiculos/Catalogo_Vehiculos";
-  //  }
 
-  @GetMapping("/admin/rentas")
+    @GetMapping("/admin/rentas")
     public String listarRentas(Model model) {
         model.addAttribute("rentas", rentaService.findAllRentas());
         return "admin/rentas/listaRentas";
     }
 
-  @GetMapping("/admin/rentas/nuevo")
-public String mostrarFormularioRenta(Model model) {
-    model.addAttribute("renta", new Renta());
-    model.addAttribute("vehiculos", vehiculoService.findAllVehiculos());
-    model.addAttribute("titulo", "Nueva Renta");
-    return "admin/rentas/formRenta";
-}
+    @GetMapping("/admin/rentas/nuevo")
+    public String mostrarFormularioRenta(Model model) {
+        model.addAttribute("renta", new Renta());
+        model.addAttribute("vehiculos", vehiculoService.findAllVehiculos());
+        model.addAttribute("titulo", "Nueva Renta");
+        return "admin/rentas/formRenta";
+    }
 
     @PostMapping("/admin/rentas/guardar")
     public String guardarRenta(@Valid @ModelAttribute Renta renta, 
@@ -258,6 +239,37 @@ public String mostrarFormularioRenta(Model model) {
             return "redirect:/admin/rentas";
         });
     }
-    
-   
+
+    // ===== MÉTODOS PARA SOLICITUDES DE RENTA =====
+
+    // Mostrar formulario de solicitud de información
+    @GetMapping("/renta/solicitar/{vehiculo}")
+    public String mostrarFormularioSolicitud(@PathVariable String vehiculo, Model model) {
+        SolicitudesRenta solicitud = new SolicitudesRenta(); // Nombre cambiado
+        solicitud.setVehiculoInteres(vehiculo);
+        model.addAttribute("solicitud", solicitud);
+        return "admin/rentas/FormRentaSolicitudes";
+    }
+
+    // Procesar el formulario de solicitud
+    @PostMapping("/renta/solicitar")
+    public String procesarSolicitud(@Valid @ModelAttribute("solicitud") SolicitudesRenta solicitud, // Nombre cambiado
+                                  BindingResult result, 
+                                  RedirectAttributes redirectAttributes) {
+        
+        if (result.hasErrors()) {
+            return "admin/renta/FormRentaSolicitudes";
+        }
+        
+        solicitudesRentaRepo.save(solicitud); // Nombre cambiado
+        redirectAttributes.addFlashAttribute("mensaje", "¡Solicitud enviada con éxito! Nos contactaremos contigo pronto.");
+        return "redirect:/alquiler";
+    }
+
+    // Para la sección administrativa - ver todas las solicitudes
+    @GetMapping("/admin/solicitudes")
+    public String listarSolicitudes(Model model) {
+        model.addAttribute("solicitudes", solicitudesRentaRepo.findAll()); // Nombre cambiado
+        return "admin/rentas/ListaRentaSolicitudes";
+    }
 }

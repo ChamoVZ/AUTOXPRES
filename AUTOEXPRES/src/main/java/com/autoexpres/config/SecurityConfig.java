@@ -55,6 +55,12 @@ public class SecurityConfig {
                     "/admin/rentas/eliminar/{id}",
                     "/admin/rentas/detalle/{id}",
                     "admin/rentas/listaRentas",
+                    "/renta/solicitar/{vehiculo}",
+                    "/renta/solicitar",
+                    "/admin/solicitudes",
+                    "admin/rentas/FormRentaSolicitudes",
+                    "admin/renta/FormRentaSolicitudes",
+                    "admin/rentas/ListaRentaSolicitudes",
                     //aqui termina lo e admin
                     "/detallevehiculo",
                     "/css/**",
