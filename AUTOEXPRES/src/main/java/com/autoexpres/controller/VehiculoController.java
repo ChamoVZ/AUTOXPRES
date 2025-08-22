@@ -1,11 +1,11 @@
-package com.autoexpres.controller; 
+package com.autoexpres.controller;
 
 import com.autoexpres.model.Vehiculo;
-import com.autoexpres.model.Renta; 
+import com.autoexpres.model.Renta;
 import com.autoexpres.model.SolicitudesRenta; // Nombre cambiado
 import com.autoexpres.repository.SolicitudesRentaRepo; // Nombre cambiado
 import com.autoexpres.service.VehiculoService;
-import com.autoexpres.service.RentaService; 
+import com.autoexpres.service.RentaService;
 import com.autoexpres.model.CotizacionVehiculo;
 import com.autoexpres.repository.CotizacionVehiculoRepository;
 import java.util.List;
@@ -22,33 +22,33 @@ import org.springframework.validation.BindingResult;
 @RequestMapping("")
 public class VehiculoController {
 
-    @Autowired 
+    @Autowired
     private VehiculoService vehiculoService;
 
     @Autowired
     private RentaService rentaService;
-    
+
     @Autowired
     private SolicitudesRentaRepo solicitudesRentaRepo; // Nombre cambiado
-    
-    @Autowired 
+
+    @Autowired
     private CotizacionVehiculoRepository cotizacionVehiculoRepository;
 
     @GetMapping("/")
     public String index() {
-        return "index"; 
+        return "index";
     }
-    
+
     @GetMapping("http://localhost:90/")
     public String local() {
-        return "index"; 
+        return "index";
     }
-   
+
     @GetMapping("/catalogo")
     public String mostrarCatalogo(Model model) {
         List<Vehiculo> vehiculos = vehiculoService.findAllVehiculos();
-        model.addAttribute("vehiculos", vehiculos); 
-        return "vehiculos/Catalogo_Vehiculos"; 
+        model.addAttribute("vehiculos", vehiculos);
+        return "vehiculos/Catalogo_Vehiculos";
     }
 
     @GetMapping("/cotizacion/porsche-911")
@@ -81,17 +81,17 @@ public class VehiculoController {
     public String mostrarRenta(Model model) {
         List<Renta> rentas = rentaService.findAllRentas();
         model.addAttribute("rentas", rentas);
-        return "renta"; 
+        return "renta";
     }
 
     @GetMapping("/nosotros")
     public String mostrarNosotros() {
-        return "sobreNosotros"; 
+        return "sobreNosotros";
     }
-    
+
     @GetMapping("/contactenos")
     public String mostrarcontactenos() {
-        return "contactenos"; 
+        return "contactenos";
     }
 
     @GetMapping("/vehiculo/{id}")
@@ -128,15 +128,15 @@ public class VehiculoController {
     public String mostrarFormularioCreacion(Model model) {
         model.addAttribute("vehiculo", new Vehiculo());
         model.addAttribute("titulo", "Agregar Nuevo Vehículo");
-        return "admin/vehiculos/formVehiculo"; 
+        return "admin/vehiculos/formVehiculo";
     }
 
     // Guardar un nuevo vehículo o actualizar uno existente (CREATE/UPDATE - POST)
     @PostMapping("/admin/vehiculos/guardar")
     public String guardarVehiculo(@Valid @ModelAttribute("vehiculo") Vehiculo vehiculo,
-                                  BindingResult result, 
-                                  RedirectAttributes redirectAttributes,
-                                  Model model) { 
+            BindingResult result,
+            RedirectAttributes redirectAttributes,
+            Model model) {
 
         if (result.hasErrors()) {
             model.addAttribute("titulo", vehiculo.getId() == null ? "Agregar Nuevo Vehículo" : "Editar Vehículo");
@@ -187,17 +187,17 @@ public class VehiculoController {
     }
 
     @PostMapping("/admin/rentas/guardar")
-    public String guardarRenta(@Valid @ModelAttribute Renta renta, 
-                             BindingResult result,
-                             Model model,
-                             RedirectAttributes redirectAttributes) {
-        
+    public String guardarRenta(@Valid @ModelAttribute Renta renta,
+            BindingResult result,
+            Model model,
+            RedirectAttributes redirectAttributes) {
+
         if (result.hasErrors()) {
             model.addAttribute("vehiculos", vehiculoService.findAllVehiculos());
             model.addAttribute("titulo", renta.getId() == null ? "Nueva Renta" : "Editar Renta");
             return "admin/rentas/formRenta";
         }
-        
+
         rentaService.saveRenta(renta);
         redirectAttributes.addFlashAttribute("mensaje", "Renta guardada exitosamente");
         return "redirect:/admin/rentas";
@@ -206,12 +206,12 @@ public class VehiculoController {
     @GetMapping("/admin/rentas/editar/{id}")
     public String editarRenta(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         Optional<Renta> renta = rentaService.findRentaById(id);
-        
+
         if (renta.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Renta no encontrada");
             return "redirect:/admin/rentas";
         }
-        
+
         model.addAttribute("renta", renta.get());
         model.addAttribute("vehiculos", vehiculoService.findAllVehiculos());
         model.addAttribute("titulo", "Editar Renta");
@@ -228,7 +228,7 @@ public class VehiculoController {
         }
         return "redirect:/admin/rentas";
     }
-    
+
     @GetMapping("/admin/rentas/detalle/{id}")
     public String detalleRenta(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         return rentaService.findRentaById(id).map(renta -> {
@@ -241,7 +241,6 @@ public class VehiculoController {
     }
 
     // ===== MÉTODOS PARA SOLICITUDES DE RENTA =====
-
     // Mostrar formulario de solicitud de información
     @GetMapping("/renta/solicitar/{vehiculo}")
     public String mostrarFormularioSolicitud(@PathVariable String vehiculo, Model model) {
@@ -252,34 +251,23 @@ public class VehiculoController {
     }
 
     // Procesar el formulario de solicitud
-<<<<<<< HEAD
+
     @PostMapping("/renta/solicitar")
     public String procesarSolicitud(@Valid @ModelAttribute("solicitud") SolicitudesRenta solicitud, // Nombre cambiado
-                                  BindingResult result, 
-                                  RedirectAttributes redirectAttributes) {
-        
+            BindingResult result,
+            RedirectAttributes redirectAttributes) {
+
         if (result.hasErrors()) {
             return "admin/rentas/FormRentaSolicitudes";
         }
-        
+
         solicitudesRentaRepo.save(solicitud); // Nombre cambiado
         redirectAttributes.addFlashAttribute("mensaje", "¡Solicitud enviada con éxito! Nos contactaremos contigo pronto.");
         return "redirect:/alquiler";
-=======
-  @PostMapping("/renta/solicitar")
-public String procesarSolicitud(@Valid @ModelAttribute("solicitud") SolicitudesRenta solicitud, 
-                              BindingResult result, 
-                              RedirectAttributes redirectAttributes) {
-    
-    if (result.hasErrors()) {
-        return "admin/rentas/FormRentaSolicitudes";
->>>>>>> 9373f8df271ec1e05ef910985e4d387b34b6c68f
+
+
+        
     }
-    
-    solicitudesRentaRepo.save(solicitud);
-    redirectAttributes.addFlashAttribute("mensaje", "¡Solicitud enviada con éxito! Nos contactaremos contigo pronto.");
-    return "redirect:/alquiler";
-}
 
     // Para la sección administrativa - ver todas las solicitudes
     @GetMapping("/admin/solicitudes")
@@ -287,47 +275,47 @@ public String procesarSolicitud(@Valid @ModelAttribute("solicitud") SolicitudesR
         model.addAttribute("solicitudes", solicitudesRentaRepo.findAll()); // Nombre cambiado
         return "admin/rentas/ListaRentaSolicitudes";
     }
-    
-     // ===== MÉTODOS PARA COTIZACIONES DE VEHÍCULOS =====
+
+    // ===== MÉTODOS PARA COTIZACIONES DE VEHÍCULOS =====
     @GetMapping("/cotizacion/{vehiculo}")
-public String mostrarFormularioCotizacion(@PathVariable String vehiculo, Model model) {
-    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
-    cotizacion.setVehiculoInteres(vehiculo);
-    model.addAttribute("cotizacion", cotizacion);
-    return "vehiculos/formCotizacion"; // Para formulario genérico
-}
+    public String mostrarFormularioCotizacion(@PathVariable String vehiculo, Model model) {
+        CotizacionVehiculo cotizacion = new CotizacionVehiculo();
+        cotizacion.setVehiculoInteres(vehiculo);
+        model.addAttribute("cotizacion", cotizacion);
+        return "vehiculos/formCotizacion"; // Para formulario genérico
+    }
 
 // Nueva ruta específica para Audi A6
-@GetMapping("/cotizacion/audi-a6")
-public String mostrarAudiA6(Model model) {
-    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
-    cotizacion.setVehiculoInteres("Audi A6 Avant");
-    model.addAttribute("cotizacion", cotizacion);
-    return "vehiculos/Audi_A6"; // Para página específica con formulario integrado
-}
-
-@PostMapping("/cotizacion/enviar")
-public String procesarCotizacion(@Valid @ModelAttribute("cotizacion") CotizacionVehiculo cotizacion, 
-                               BindingResult result, 
-                               RedirectAttributes redirectAttributes) {
-    
-    if (result.hasErrors()) {
-        // Determinar a qué página regresar basado en el vehículo
-        if ("Audi A6 Avant".equals(cotizacion.getVehiculoInteres())) {
-            return "vehiculos/Audi_A6";
-        } else {
-            return "vehiculos/formCotizacion";
-        }
+    @GetMapping("/cotizacion/audi-a6")
+    public String mostrarAudiA6(Model model) {
+        CotizacionVehiculo cotizacion = new CotizacionVehiculo();
+        cotizacion.setVehiculoInteres("Audi A6 Avant");
+        model.addAttribute("cotizacion", cotizacion);
+        return "vehiculos/Audi_A6"; // Para página específica con formulario integrado
     }
-    
-    cotizacionVehiculoRepository.save(cotizacion);
-    redirectAttributes.addFlashAttribute("mensaje", "¡Cotización enviada con éxito! Nos contactaremos contigo pronto.");
-    return "redirect:/catalogo";
-}
 
-@GetMapping("/admin/cotizaciones")
-public String listarCotizaciones(Model model) {
-    model.addAttribute("cotizaciones", cotizacionVehiculoRepository.findAll());
-    return "admin/cotizaciones/listaCotizaciones";
-}
+    @PostMapping("/cotizacion/enviar")
+    public String procesarCotizacion(@Valid @ModelAttribute("cotizacion") CotizacionVehiculo cotizacion,
+            BindingResult result,
+            RedirectAttributes redirectAttributes) {
+
+        if (result.hasErrors()) {
+            // Determinar a qué página regresar basado en el vehículo
+            if ("Audi A6 Avant".equals(cotizacion.getVehiculoInteres())) {
+                return "vehiculos/Audi_A6";
+            } else {
+                return "vehiculos/formCotizacion";
+            }
+        }
+
+        cotizacionVehiculoRepository.save(cotizacion);
+        redirectAttributes.addFlashAttribute("mensaje", "¡Cotización enviada con éxito! Nos contactaremos contigo pronto.");
+        return "redirect:/catalogo";
+    }
+
+    @GetMapping("/admin/cotizaciones")
+    public String listarCotizaciones(Model model) {
+        model.addAttribute("cotizaciones", cotizacionVehiculoRepository.findAll());
+        return "admin/cotizaciones/listaCotizaciones";
+    }
 }
