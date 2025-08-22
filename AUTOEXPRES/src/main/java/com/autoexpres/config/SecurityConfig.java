@@ -25,7 +25,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 // Rutas públicas accesibles por cualquier persona
                 .requestMatchers(
-                    "/", "/index",
+                    
+                    "/", 
+                    "/index",
                     "/catalogo",
                     "/alquiler",
                     "/nosotros",
