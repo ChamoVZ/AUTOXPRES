@@ -31,7 +31,11 @@ public class VehiculoController {
     public String index() {
         return "index"; 
     }
-
+    
+    @GetMapping("http://localhost:90/")
+    public String local() {
+        return "index"; 
+    }
    
     @GetMapping("/catalogo")
     public String mostrarCatalogo(Model model) {
