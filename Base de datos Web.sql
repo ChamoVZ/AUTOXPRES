@@ -54,8 +54,31 @@ CREATE TABLE IF NOT EXISTS clientes (
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS solicitudes_renta (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    vehiculo_interes VARCHAR(100) NOT NULL,
+    mensaje TEXT,
+    fecha_solicitud TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+select*from solicitudes_renta;
 
+CREATE TABLE IF NOT EXISTS cotizaciones_vehiculos (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    vehiculo_interes VARCHAR(100) NOT NULL,
+    mensaje TEXT,
+    fecha_cotizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tipo_vehiculo ENUM('NUEVO', 'USADO') NOT NULL DEFAULT 'USADO'
+);
 
+SELECT*FROM cotizaciones_vehiculos;
 DROP USER IF EXISTS 'AutoXpres'@'localhost';
 
 -- Crear el usuario con la clave especificada
