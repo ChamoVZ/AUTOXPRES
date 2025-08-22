@@ -35,13 +35,25 @@
                         <i class="bi bi-plus-circle-fill me-1"></i> Agregar/ Ver Rentas
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a 
-                        class="nav-link btn btn-dark text-red rounded-pill ms-lg-2"
-                        href="#" 
-                        id="login-button"
-                        onclick="abrirModal('login-modal'); return false;">
+
+                <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle" style="font-size: 1.5rem;"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/perfil}">Mi Perfil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                  <li class="nav-item" sec:authorize="!isAuthenticated()">
+                 
+                    <a class="nav-link btn btn-dark text-red rounded-pill ms-lg-2" href="#" onclick="abrirModal('login-modal');">
                         Iniciar Sesión
+                    </a>
+                      
+                       <a class="nav-link btn btn-dark text-red rounded-pill ms-lg-2" href="#" onclick="abrirModal('registro-modal');">
+                        Registrarse
                     </a>
                 </li>
             </ul>

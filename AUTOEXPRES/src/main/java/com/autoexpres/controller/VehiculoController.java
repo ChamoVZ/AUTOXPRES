@@ -258,7 +258,7 @@ public class VehiculoController {
                                   RedirectAttributes redirectAttributes) {
         
         if (result.hasErrors()) {
-            return "admin/renta/FormRentaSolicitudes";
+            return "admin/rentas/FormRentaSolicitudes";
         }
         
         solicitudesRentaRepo.save(solicitud); // Nombre cambiado

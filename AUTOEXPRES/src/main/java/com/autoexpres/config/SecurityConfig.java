@@ -27,8 +27,9 @@ public class SecurityConfig {
                 .requestMatchers(
                     
                     "/", 
-                    "/index",
+                    "/perfil",
                     "/catalogo",
+                    "/registro",
                     "/alquiler",
                     "/nosotros",
                     "/contactenos",
@@ -55,12 +56,14 @@ public class SecurityConfig {
                     "/admin/rentas/eliminar/{id}",
                     "/admin/rentas/detalle/{id}",
                     "admin/rentas/listaRentas",
+                    
+                    
                     "/renta/solicitar/{vehiculo}",
                     "/renta/solicitar",
                     "/admin/solicitudes",
                     "admin/rentas/FormRentaSolicitudes",
-                    "admin/renta/FormRentaSolicitudes",
-                    "admin/rentas/ListaRentaSolicitudes",
+                    "admin/rentas/FormRentaSolicitudes",
+                    "admin/rentas/ListaRentasSolicitudes",
                     //aqui termina lo e admin
                     "/detallevehiculo",
                     "/css/**",

@@ -12,7 +12,6 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,57 +28,34 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Column(nullable = false, unique = true)
-    private String username; // Usaremos esto para el login
+    @Column(nullable = false)
+    private String nombre; // Coincide con el campo 'nombre' en tu DB
+
+    @Column(nullable = false)
+    private String apellido; // Coincide con el campo 'apellido' en tu DB
 
     @NotBlank
     @Email
     @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = true) // La contraseña puede ser nula si el usuario se registra con Google
     private String password;
 
-    // Aquí se guardarán los roles, separados por comas (ej. "ADMIN,USER")
     @Column(nullable = false)
-    private String roles = "";
+    private String rol;
 
-    // Aquí se guardarán los permisos, separados por comas (ej. "CREATE,DELETE")
-    @Column(nullable = false)
-    private String permissions = "";
-
-    @Column(nullable = false)
-    private int active = 1;
-
-    // === Métodos de ayuda para roles y permisos ===
-    
+    // === Métodos de ayuda para roles ===
     @Transient // Indica a JPA que este campo no se mapea a una columna en la base de datos
-    public boolean isEnabled() {
-        return this.active == 1;
-    }
-    
-    @Transient
     public List<String> getRoleList() {
-        if (this.roles == null || this.roles.isBlank()) {
+        if (this.rol == null || this.rol.isBlank()) {
             return new ArrayList<>();
         }
-        return Arrays.stream(this.roles.split(","))
+        return Arrays.stream(this.rol.split(","))
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
                 .map(String::toUpperCase)
                 .collect(Collectors.toList());
     }
 
-    @Transient
-    public List<String> getPermissionList() {
-        if (this.permissions == null || this.permissions.isBlank()) {
-            return new ArrayList<>();
-        }
-        return Arrays.stream(this.permissions.split(","))
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .collect(Collectors.toList());
-    }
 }

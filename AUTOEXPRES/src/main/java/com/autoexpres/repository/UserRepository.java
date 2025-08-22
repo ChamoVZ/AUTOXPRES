@@ -4,7 +4,8 @@ import com.autoexpres.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    Optional<Usuario> findByUsername(String username); // Método para buscar por el nombre de usuario
+public interface UserRepository extends JpaRepository<Usuario, Long> {
+    // Método para buscar un usuario por su email.
+    // Necesario tanto para el registro como para el login por formulario y OAuth2.
     Optional<Usuario> findByEmail(String email);
 }

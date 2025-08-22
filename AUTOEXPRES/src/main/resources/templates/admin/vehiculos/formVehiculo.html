@@ -19,9 +19,10 @@
 
             <form th:action="@{/admin/vehiculos/guardar}" th:object="${vehiculo}" method="post">
                 <input type="hidden" th:field="*{id}" />
+                
 
                 <div class="mb-3">
-                    <label for="marca" class="form-label">Marca:</label>
+                     <label for="marca" class="form-label">Marca:</label>
                     <input type="text" id="marca" th:field="*{marca}" class="form-control" required>
                 </div>
                 <div class="mb-3">

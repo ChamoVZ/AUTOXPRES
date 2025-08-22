@@ -41,6 +41,7 @@
         <div class="form-container">
             <form th:action="@{/renta/solicitar}" th:object="${solicitud}" method="post">
                 <!-- Vehículo de interés (no editable) -->
+                 <input type="hidden" th:field="*{vehiculoInteres}" />
                 <div class="mb-3">
                     <label for="vehiculoInteres" class="form-label fw-bold">Vehículo de interés:</label>
                     <input type="text" id="vehiculoInteres" th:field="*{vehiculoInteres}" 
@@ -94,7 +95,7 @@
                         <i class="bi bi-arrow-left"></i> Volver
                     </a>
                       <li class="nav-item">
-                    <a class="nav-link" th:href="@{mensaje}">Enviar solicitud</a>
+                    <a class="nav-link" th:href="@{/renta/solicitar}">Enviar solicitud</a>
                 </li>
                 </div>
             </form>
