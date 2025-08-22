@@ -31,6 +31,12 @@ public class SecurityConfig {
                     "/nosotros",
                     "/contactenos",
                     "/renta",
+                    "/cotizacion/porsche-911",
+                    "/cotizacion/touareg-r",
+                    "/cotizacion/bmw-m850i",
+                    "/cotizacion/bmw-x6",
+                    "/cotizacion/panamera",
+                    "/cotizacion/audi-a6",
                     "vehiculos/Catalogo_Vehiculos",
                    //aqui empiezo lo de admin
                     "/vehiculo/{id}",
@@ -47,7 +53,6 @@ public class SecurityConfig {
                     "/admin/rentas/eliminar/{id}",
                     "/admin/rentas/detalle/{id}",
                     "admin/rentas/listaRentas",
-                    
                     //aqui termina lo e admin
                     "/detallevehiculo",
                     "/css/**",
