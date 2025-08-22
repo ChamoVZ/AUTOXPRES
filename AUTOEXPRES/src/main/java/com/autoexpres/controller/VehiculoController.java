@@ -6,6 +6,8 @@ import com.autoexpres.model.SolicitudesRenta; // Nombre cambiado
 import com.autoexpres.repository.SolicitudesRentaRepo; // Nombre cambiado
 import com.autoexpres.service.VehiculoService;
 import com.autoexpres.service.RentaService; 
+import com.autoexpres.model.CotizacionVehiculo;
+import com.autoexpres.repository.CotizacionVehiculoRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class VehiculoController {
     
     @Autowired
     private SolicitudesRentaRepo solicitudesRentaRepo; // Nombre cambiado
+    
+    @Autowired 
+    private CotizacionVehiculoRepository cotizacionVehiculoRepository;
 
     @GetMapping("/")
     public String index() {
@@ -69,11 +74,6 @@ public class VehiculoController {
     @GetMapping("/cotizacion/panamera")
     public String mostrarCotizacionPanamera() {
         return "vehiculos/Porshe_Panamera";
-    }
-
-    @GetMapping("/cotizacion/audi-a6")
-    public String mostrarCotizacionAudiA6() {
-        return "vehiculos/Audi_A6";
     }
 
     // Endpoint para la renta
@@ -272,4 +272,47 @@ public String procesarSolicitud(@Valid @ModelAttribute("solicitud") SolicitudesR
         model.addAttribute("solicitudes", solicitudesRentaRepo.findAll()); // Nombre cambiado
         return "admin/rentas/ListaRentaSolicitudes";
     }
+    
+     // ===== MÉTODOS PARA COTIZACIONES DE VEHÍCULOS =====
+    @GetMapping("/cotizacion/{vehiculo}")
+public String mostrarFormularioCotizacion(@PathVariable String vehiculo, Model model) {
+    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
+    cotizacion.setVehiculoInteres(vehiculo);
+    model.addAttribute("cotizacion", cotizacion);
+    return "vehiculos/formCotizacion"; // Para formulario genérico
+}
+
+// Nueva ruta específica para Audi A6
+@GetMapping("/cotizacion/audi-a6")
+public String mostrarAudiA6(Model model) {
+    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
+    cotizacion.setVehiculoInteres("Audi A6 Avant");
+    model.addAttribute("cotizacion", cotizacion);
+    return "vehiculos/Audi_A6"; // Para página específica con formulario integrado
+}
+
+@PostMapping("/cotizacion/enviar")
+public String procesarCotizacion(@Valid @ModelAttribute("cotizacion") CotizacionVehiculo cotizacion, 
+                               BindingResult result, 
+                               RedirectAttributes redirectAttributes) {
+    
+    if (result.hasErrors()) {
+        // Determinar a qué página regresar basado en el vehículo
+        if ("Audi A6 Avant".equals(cotizacion.getVehiculoInteres())) {
+            return "vehiculos/Audi_A6";
+        } else {
+            return "vehiculos/formCotizacion";
+        }
+    }
+    
+    cotizacionVehiculoRepository.save(cotizacion);
+    redirectAttributes.addFlashAttribute("mensaje", "¡Cotización enviada con éxito! Nos contactaremos contigo pronto.");
+    return "redirect:/catalogo";
+}
+
+@GetMapping("/admin/cotizaciones")
+public String listarCotizaciones(Model model) {
+    model.addAttribute("cotizaciones", cotizacionVehiculoRepository.findAll());
+    return "admin/cotizaciones/listaCotizaciones";
+}
 }
