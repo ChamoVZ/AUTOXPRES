@@ -62,8 +62,21 @@ public class SecurityConfig {
                     "/renta/solicitar",
                     "/admin/solicitudes",
                     "admin/rentas/FormRentaSolicitudes",
+<<<<<<< HEAD
                     "admin/rentas/FormRentaSolicitudes",
                     "admin/rentas/ListaRentasSolicitudes",
+=======
+                    "admin/renta/FormRentaSolicitudes",
+                    "admin/rentas/ListaRentaSolicitudes",
+                    "/cotizacion/{vehiculo}",
+                    "vehiculos/formCotizacion",
+                    "/cotizacion/enviar",
+                    "vehiculos/formCotizacion",
+                    "/admin/cotizaciones",
+                    "admin/cotizaciones/listaCotizaciones",
+                    "/cotizacion/audi-a6",
+                    "vehiculos/Audi_A6",
+>>>>>>> 9373f8df271ec1e05ef910985e4d387b34b6c68f
                     //aqui termina lo e admin
                     "/detallevehiculo",
                     "/css/**",
