@@ -265,21 +265,15 @@ public class VehiculoController {
     }
 
 // Nueva ruta específica para Audi A6
-<<<<<<< Updated upstream
+
     @GetMapping("/cotizacion/audi-a6")
     public String mostrarAudiA6(Model model) {
         CotizacionVehiculo cotizacion = new CotizacionVehiculo();
         cotizacion.setVehiculoInteres("Audi A6 Avant");
         model.addAttribute("cotizacion", cotizacion);
-        return "vehiculos/Audi_A6"; // Para página específica con formulario integrado
-=======
-@GetMapping("/cotizacion/audi-a6")
-public String mostrarAudiA6(Model model) {
-    CotizacionVehiculo cotizacion = new CotizacionVehiculo();
-    cotizacion.setVehiculoInteres("Audi A6 Avant");
-    model.addAttribute("cotizacion", cotizacion);
-    return "vehiculos/Audi_A6"; // Para página específica con formulario integrado
-}
+        return "vehiculos/Audi_A6";
+    }                           
+        
 
 @GetMapping("/cotizacion/bmw-m850i")
 public String mostrarBMWSerie8(Model model) {
@@ -334,22 +328,8 @@ public String procesarCotizacion(@Valid @ModelAttribute("cotizacion") Cotizacion
         } else {
             return "vehiculos/formCotizacion";
         }
->>>>>>> Stashed changes
+
     }
-
-    @PostMapping("/cotizacion/enviar")
-    public String procesarCotizacion(@Valid @ModelAttribute("cotizacion") CotizacionVehiculo cotizacion,
-            BindingResult result,
-            RedirectAttributes redirectAttributes) {
-
-        if (result.hasErrors()) {
-            // Determinar a qué página regresar basado en el vehículo
-            if ("Audi A6 Avant".equals(cotizacion.getVehiculoInteres())) {
-                return "vehiculos/Audi_A6";
-            } else {
-                return "vehiculos/formCotizacion";
-            }
-        }
 
         cotizacionVehiculoRepository.save(cotizacion);
         redirectAttributes.addFlashAttribute("mensaje", "¡Cotización enviada con éxito! Nos contactaremos contigo pronto.");

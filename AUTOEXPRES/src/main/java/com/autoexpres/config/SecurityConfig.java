@@ -25,7 +25,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                 // Rutas públicas accesibles por cualquier persona
                 .requestMatchers(
-<<<<<<< Updated upstream
                         "/",
                         "/perfil",
                         "/catalogo",
@@ -41,6 +40,16 @@ public class SecurityConfig {
                         "/cotizacion/panamera",
                         "/cotizacion/audi-a6",
                         "vehiculos/Catalogo_Vehiculos",
+                        "/cotizacion/audi-a6",
+                    "vehiculos/Audi_A6",
+                    "/cotizacion/bmw-m850i",
+                    "vehiculos/BMW_Serie8",
+                    "/cotizacion/bmw-x6",
+                    "vehiculos/BMW_X6",
+                    "/cotizacion/panamera",
+                    "vehiculos/Porshe_Panamera",
+                    "/cotizacion/touareg-r",
+                    "vehiculos/Volkswagen_Touareg",
                         //aqui empiezo lo de admin
                         "/vehiculo/{id}",
                         "/admin/vehiculos/detalle/{id}",
@@ -77,69 +86,9 @@ public class SecurityConfig {
                         "/js/**",
                         "/images/**",
                         "/vehiculos/detalle/**",
-                        "/login" // Permite el acceso a la página de login
-=======
+                        "/login"
                     
-                    "/", 
-                    "/index",
-                    "/catalogo",
-                    "/alquiler",
-                    "/nosotros",
-                    "/contactenos",
-                    "/renta",
-                    "/cotizacion/porsche-911",
-                    "/cotizacion/touareg-r",
-                    "/cotizacion/bmw-m850i",
-                    "/cotizacion/bmw-x6",
-                    "/cotizacion/panamera",
-                    "/cotizacion/audi-a6",
-                    "vehiculos/Catalogo_Vehiculos",
-                   //aqui empiezo lo de admin
-                    "/vehiculo/{id}",
-                    "/admin/vehiculos/detalle/{id}",
-                    "/admin/vehiculos",
-                    "/admin/vehiculos/nuevo",
-                    "/admin/vehiculos/guardar",
-                    "/admin/vehiculos/editar/{id}",
-                    "/admin/vehiculos/eliminar/{id}",
-                    "/admin/rentas",
-                    "/admin/rentas/nuevo",
-                    "/admin/rentas/guardar",
-                    "/admin/rentas/editar/{id}",
-                    "/admin/rentas/eliminar/{id}",
-                    "/admin/rentas/detalle/{id}",
-                    "admin/rentas/listaRentas",
-                    "/renta/solicitar/{vehiculo}",
-                    "/renta/solicitar",
-                    "/admin/solicitudes",
-                    "admin/rentas/FormRentaSolicitudes",
-                    "admin/renta/FormRentaSolicitudes",
-                    "admin/rentas/ListaRentaSolicitudes",
-                    "/cotizacion/{vehiculo}",
-                    "vehiculos/formCotizacion",
-                    "/cotizacion/enviar",
-                    "vehiculos/formCotizacion",
-                    "/admin/cotizaciones",
-                    "admin/cotizaciones/listaCotizaciones",
-                    "/cotizacion/audi-a6",
-                    "vehiculos/Audi_A6",
-                    "/cotizacion/bmw-m850i",
-                    "vehiculos/BMW_Serie8",
-                    "/cotizacion/bmw-x6",
-                    "vehiculos/BMW_X6",
-                    "/cotizacion/panamera",
-                    "vehiculos/Porshe_Panamera",
-                    "/cotizacion/touareg-r",
-                    "vehiculos/Volkswagen_Touareg",
-                    //aqui termina lo e admin
-                    "/detallevehiculo",
-                    "/css/**",
-                    "/js/**",
-                    "/images/**",
-                    "/vehiculos/detalle/**",
-                    "/login" // Permite el acceso a la página de login
->>>>>>> Stashed changes
-                ).permitAll()
+                      ).permitAll()
                 // Rutas protegidas que solo pueden ser accedidas por usuarios con rol "ADMIN"
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 // Cualquier otra solicitud requiere autenticación
